@@ -12,17 +12,17 @@ Given a URL which returns weather data in the following form:
     "three_day_forecast": [
         { 
             "conditions": "Partly cloudy",
-            "day" : "Monday"
+            "day" : "Monday",
             "temperature": 20 
         },
         { 
             "conditions": "Showers",
-            "day" : "Tuesday"
+            "day" : "Tuesday",
             "temperature": 22 
         },
         { 
             "conditions": "Sunny",
-            "day" : "Wednesday"
+            "day" : "Wednesday",
             "temperature": 28 
         }
     ]
@@ -31,13 +31,13 @@ Given a URL which returns weather data in the following form:
 
 You can use this extension as the follows:
 ```swift
-let URL = "http://weather.com/toronto"
+let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
 Alamofire.request(.GET, URL, parameters: nil).responseObject { (response: WeatherResponse?, error: NSError?) in
     println(response?.location)
     if let threeDayForecast = response?.threeDayForecast {
         for forecast in threeDayForecast {
-            println(forecast?.day)
-            println(forecast?.temperature)           
+            println(forecast.day)
+            println(forecast.temperature)           
         }
     }
 }
