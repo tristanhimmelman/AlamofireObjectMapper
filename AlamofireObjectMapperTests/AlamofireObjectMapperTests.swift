@@ -26,22 +26,21 @@ class AlamofireObjectMapperTests: XCTestCase {
     
     func testResponseObject() {
         // This is an example of a functional test case.
-		
-		let URL = "http://httpbin.org/get"
-		let parameters = ["param1": "hello", "param2": "goodbye"]
+		let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
 		let expectation = expectationWithDescription("\(URL)")
 
-		Alamofire.request(.GET, URL, parameters: parameters).responseObject { (response: Response?, error: NSError?) in
+		Alamofire.request(.GET, URL, parameters: nil).responseObject { (response: WeatherResponse?, error: NSError?) in
 			expectation.fulfill()
 
 			XCTAssertNotNil(response, "Response should not be nil")
-			XCTAssertNotNil(response?.arguments, "Arguents should not be nil")
-			XCTAssertEqual(response!.arguments!, parameters, "Arguments should equal parameters that were passed into request")
-			XCTAssertNotNil(response?.origin, "Origin should not be nil")
-			XCTAssertNotNil(response?.url, "URL should not be nil")
-			XCTAssertNotNil(response?.header, "Header should not be nil")
-			XCTAssertNotNil(response?.header?.host, "Host should not be nil")
-			XCTAssertNotNil(response?.header?.userAgent, "User Agent should not be nil")
+			XCTAssertNotNil(response?.location, "Location should not be nil")
+			XCTAssertNotNil(response?.threeDayForecast, "ThreeDayForcast should not be nil")
+			
+			for forecast in response!.threeDayForecast! {
+				XCTAssertNotNil(forecast.day, "day should not be nil")
+				XCTAssertNotNil(forecast.conditions, "conditions should not be nil")
+				XCTAssertNotNil(forecast.temperature, "temperature should not be nil")
+			}
 		}
 		
 		waitForExpectationsWithTimeout(10, handler: { (error: NSError!) -> Void in
@@ -52,22 +51,22 @@ class AlamofireObjectMapperTests: XCTestCase {
 	func testResponseObject2() {
 		// This is an example of a functional test case.
 		
-		let URL = "http://httpbin.org/get"
-		let parameters = ["param1":"hello", "param2": "goodbye"]
+		let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
 		let expectation = expectationWithDescription("\(URL)")
 		
-		Alamofire.request(.GET, URL, parameters: parameters).responseObject { (request: NSURLRequest, HTTPURLResponse: NSHTTPURLResponse?, response: Response?, data: AnyObject?, error: NSError?) in
+		Alamofire.request(.GET, URL, parameters: nil).responseObject { (request: NSURLRequest, HTTPURLResponse: NSHTTPURLResponse?, response: WeatherResponse?, data: AnyObject?, error: NSError?) in
 			
 			expectation.fulfill()
 			
 			XCTAssertNotNil(response, "Response should not be nil")
-			XCTAssertNotNil(response?.arguments, "Arguents should not be nil")
-			XCTAssertEqual(response!.arguments!, parameters, "Arguments should equal parameters that were passed into request")
-			XCTAssertNotNil(response?.origin, "Origin should not be nil")
-			XCTAssertNotNil(response?.url, "URL should not be nil")
-			XCTAssertNotNil(response?.header, "Header should not be nil")
-			XCTAssertNotNil(response?.header?.host, "Host should not be nil")
-			XCTAssertNotNil(response?.header?.userAgent, "User Agent should not be nil")
+			XCTAssertNotNil(response?.location, "Location should not be nil")
+			XCTAssertNotNil(response?.threeDayForecast, "ThreeDayForcast should not be nil")
+
+			for forecast in response!.threeDayForecast! {
+				XCTAssertNotNil(forecast.day, "day should not be nil")
+				XCTAssertNotNil(forecast.conditions, "conditions should not be nil")
+				XCTAssertNotNil(forecast.temperature, "temperature should not be nil")
+			}
 		}
 		
 		waitForExpectationsWithTimeout(10, handler: { (error: NSError!) -> Void in
@@ -76,11 +75,9 @@ class AlamofireObjectMapperTests: XCTestCase {
 	}
 }
 
-class Response: Mappable {
-	var header: Header?
-	var origin: String?
-	var url: NSURL?
-	var arguments: [String:String]?
+class WeatherResponse: Mappable {
+	var location: String?
+	var threeDayForecast: [Forecast]?
 	
 	init() {}
 	
@@ -89,16 +86,15 @@ class Response: Mappable {
 	}
 	
 	func mapping(map: Map) {
-		header		<- map["headers"]
-		origin		<- map["origin"]
-		url			<- (map["url"], URLTransform())
-		arguments	<- map["args"]
+		location <- map["location"]
+		threeDayForecast <- map["three_day_forecast"]
 	}
 }
 
-class Header: Mappable {
-	var host: String?
-	var userAgent: String?
+class Forecast: Mappable {
+	var day: String?
+	var temperature: Int?
+	var conditions: String?
 	
 	init() {}
 	
@@ -107,7 +103,8 @@ class Header: Mappable {
 	}
 	
 	func mapping(map: Map) {
-		host			<- map["Host"]
-		userAgent		<- map["User-Agent"]
+		day <- map["day"]
+		temperature <- map["temperature"]
+		conditions <- map["conditions"]
 	}
 }

@@ -34,9 +34,11 @@ You can use this extension as the follows:
 let URL = "http://weather.com/toronto"
 Alamofire.request(.GET, URL, parameters: nil).responseObject { (response: WeatherResponse?, error: NSError?) in
     println(response?.location)
-    for forecast in response?.threeDayForecast {
-        println(forecast?.day)
-        println(forecast?.temperature)           
+    if let threeDayForecast = response?.threeDayForecast {
+        for forecast in threeDayForecast {
+            println(forecast?.day)
+            println(forecast?.temperature)           
+        }
     }
 }
 ```
@@ -55,16 +57,16 @@ class WeatherResponse: Mappable {
     }
     
     func mapping(map: Map) {
-        location    <- map["location"]
-        forecast    <- map["three_day_forecast"]
+        location <- map["location"]
+        threeDayForecast <- map["three_day_forecast"]
     }
 }
 
-class Forecast {
-    var temperature: Int?
+class Forecast: Mappable {
     var day: String?
+    var temperature: Int?
     var conditions: String?
-
+    
     init() {}
     
     required init?(_ map: Map) {
@@ -72,9 +74,9 @@ class Forecast {
     }
     
     func mapping(map: Map) {
+        day <- map["day"]
         temperature <- map["temperature"]
-        day         <- map["day"]
-        conditions  <- map["conditions"]
+        conditions <- map["conditions"]
     }
 }
 ```
