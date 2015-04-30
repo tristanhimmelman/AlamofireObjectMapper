@@ -3,17 +3,17 @@
     "three_day_forecast": [
         { 
             "conditions": "Partly cloudy",
-            "day" : "Monday"
+            "day" : "Monday",
             "temperature": 20 
         },
         { 
             "conditions": "Showers",
-            "day" : "Tuesday"
+            "day" : "Tuesday",
             "temperature": 22 
         },
         { 
             "conditions": "Sunny",
-            "day" : "Wednesday"
+            "day" : "Wednesday",
             "temperature": 28 
         }
     ]
