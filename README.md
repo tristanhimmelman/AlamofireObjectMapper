@@ -9,13 +9,23 @@ Given a URL which returns weather data in the following form:
 ```
 {
     "location": "Toronto, Canada",    
-    "conditions": "Partly cloudy",
-    "temperature": 20
-    "forecast": {
-        "1pm" : 21,
-        "2pm" : 22,
-        "3pm" : 23
-    }
+    "three_day_forecast": [
+        { 
+            "conditions": "Partly cloudy",
+            "day" : "Monday"
+            "temperature": 20 
+        },
+        { 
+            "conditions": "Showers",
+            "day" : "Tuesday"
+            "temperature": 22 
+        },
+        { 
+            "conditions": "Sunny",
+            "day" : "Wednesday"
+            "temperature": 28 
+        }
+    ]
 }
 ```
 
@@ -23,9 +33,11 @@ You can use this extension as the follows:
 ```swift
 let URL = "http://weather.com/toronto"
 Alamofire.request(.GET, URL, parameters: nil).responseObject { (response: WeatherResponse?, error: NSError?) in
-    println(response?.conditions)
-    println(response?.temperature)
-    println(response?.forecast?["3pm"])   
+    println(response?.location)
+    for forecast in response?.threeDayForecast {
+        println(forecast?.day)
+        println(forecast?.temperature)           
+    }
 }
 ```
 
@@ -34,9 +46,7 @@ The `WeatherResponse` object in the completion handler is a custom object which 
 ```swift
 class WeatherResponse: Mappable {
     var location: String?
-    var conditions: String?
-    var temperature: Int?
-    var forecast: [String:Int]?
+    var threeDayForecast: [Forecast]?
     
     init() {}
     
@@ -46,9 +56,25 @@ class WeatherResponse: Mappable {
     
     func mapping(map: Map) {
         location    <- map["location"]
-        conditions  <- map["conditions"]
+        forecast    <- map["three_day_forecast"]
+    }
+}
+
+class Forecast {
+    var temperature: Int?
+    var day: String?
+    var conditions: String?
+
+    init() {}
+    
+    required init?(_ map: Map) {
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
         temperature <- map["temperature"]
-        forecast    <- map["forecast"]
+        day         <- map["day"]
+        conditions  <- map["conditions"]
     }
 }
 ```
