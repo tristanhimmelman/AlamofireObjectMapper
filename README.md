@@ -1,7 +1,7 @@
 AlamofireObjectMapper
 ============
 
-An extension to [Alamofire](https://github.com/Alamofire/Alamofire) which automatically converts response data into swift objects using [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper/). 
+An extension to [Alamofire](https://github.com/Alamofire/Alamofire) which automatically converts JSON response data into swift objects using [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper/). 
 
 #Usage
 
