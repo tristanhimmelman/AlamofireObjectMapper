@@ -32,14 +32,15 @@ Given a URL which returns weather data in the following form:
 You can use this extension as the follows:
 ```swift
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
-Alamofire.request(.GET, URL, parameters: nil).responseObject { (response: WeatherResponse?, error: NSError?) in
-    println(response?.location)
-    if let threeDayForecast = response?.threeDayForecast {
-        for forecast in threeDayForecast {
-            println(forecast.day)
-            println(forecast.temperature)           
-        }
-    }
+Alamofire.request(.GET, URL, parameters: nil)
+         .responseObject { (response: WeatherResponse?, error: NSError?) in
+            println(response?.location)
+            if let threeDayForecast = response?.threeDayForecast {
+                for forecast in threeDayForecast {
+                    println(forecast.day)
+                    println(forecast.temperature)           
+                }
+            }
 }
 ```
 
