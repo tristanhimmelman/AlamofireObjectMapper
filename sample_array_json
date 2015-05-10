@@ -1,0 +1,17 @@
+[
+    { 
+        "conditions": "Partly cloudy",
+        "day" : "Monday",
+        "temperature": 20 
+    },
+    { 
+        "conditions": "Showers",
+        "day" : "Tuesday",
+        "temperature": 22 
+    },
+    { 
+        "conditions": "Sunny",
+        "day" : "Wednesday",
+        "temperature": 28 
+    }
+]
