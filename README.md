@@ -95,6 +95,53 @@ func responseObject<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResp
 ```swift
 func responseObject<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, NSError?) -> Void) -> Self
 ```
+#Array Responses
+If you have an endpoint that returns data in `Array` form you can map it with the following functions:
+```swift
+func responseArray<T: Mappable>(completionHandler: ([T]?, NSError?) -> Void) -> Self
+```
+
+```swift
+func responseArray<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, NSError?) -> Void) -> Self
+```
+
+```swift
+func responseArray<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, NSError?) -> Void) -> Self
+```
+For example, if your endpoint returns the following:
+```
+[
+    { 
+        "conditions": "Partly cloudy",
+        "day" : "Monday",
+        "temperature": 20 
+    },
+    { 
+        "conditions": "Showers",
+        "day" : "Tuesday",
+        "temperature": 22 
+    },
+    { 
+        "conditions": "Sunny",
+        "day" : "Wednesday",
+        "temperature": 28 
+    }
+]
+```
+You can request and map it as follows:
+```swift
+let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
+Alamofire.request(.GET, URL, parameters: nil)
+         .responseArray { (response: [Forecast]?, error: NSError?) in
+            println(response?.location)
+            if let response = response {
+                for forecast in response {
+                    println(forecast.day)
+                    println(forecast.temperature)           
+                }
+            }
+}
+```
 
 #Installation
 AlamofireObjectMapper can be added to your project using [Cocoapods](https://cocoapods.org/) by adding the following line to your Podfile:
