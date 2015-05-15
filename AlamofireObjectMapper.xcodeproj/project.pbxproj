@@ -24,8 +24,8 @@
 		6AB2A0A51AF282A6001EBB20 /* AlmofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A02D1AF2746D001EBB20 /* AlmofireObjectMapper.swift */; };
 		6AB2A0AC1AF283B2001EBB20 /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A0A11AF2816E001EBB20 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6AB2A0AD1AF283B2001EBB20 /* ObjectMapper.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A09F1AF28166001EBB20 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6AB2A0AF1AF283C8001EBB20 /* Alamofire.framework in Linked Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A0A11AF2816E001EBB20 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6AB2A0B01AF283C8001EBB20 /* ObjectMapper.framework in Linked Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A09F1AF28166001EBB20 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6AB2A0AF1AF283C8001EBB20 /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A0A11AF2816E001EBB20 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6AB2A0B01AF283C8001EBB20 /* ObjectMapper.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A09F1AF28166001EBB20 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,16 +58,16 @@
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 1;
 		};
-		6AB2A0AE1AF283C0001EBB20 /* Linked Frameworks */ = {
+		6AB2A0AE1AF283C0001EBB20 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6AB2A0AF1AF283C8001EBB20 /* Alamofire.framework in Linked Frameworks */,
-				6AB2A0B01AF283C8001EBB20 /* ObjectMapper.framework in Linked Frameworks */,
+				6AB2A0AF1AF283C8001EBB20 /* Alamofire.framework in Copy Frameworks */,
+				6AB2A0B01AF283C8001EBB20 /* ObjectMapper.framework in Copy Frameworks */,
 			);
-			name = "Linked Frameworks";
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -230,6 +230,7 @@
 				6AB2A00D1AF26C36001EBB20 /* Frameworks */,
 				6AB2A00E1AF26C36001EBB20 /* Headers */,
 				6AB2A0AB1AF283A5001EBB20 /* Copy Frameworks */,
+				6A905E411B067F8100884083 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -266,7 +267,8 @@
 				6AB2A0811AF27DF1001EBB20 /* Frameworks */,
 				6AB2A0821AF27DF1001EBB20 /* Headers */,
 				6AB2A0831AF27DF1001EBB20 /* Resources */,
-				6AB2A0AE1AF283C0001EBB20 /* Linked Frameworks */,
+				6AB2A0AE1AF283C0001EBB20 /* Copy Frameworks */,
+				6A905E421B067FFA00884083 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -361,6 +363,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6A905E411B067F8100884083 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		6A905E421B067FFA00884083 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6AB2A00C1AF26C36001EBB20 /* Sources */ = {
