@@ -151,5 +151,5 @@ pod 'AlamofireObjectMapper', '~> 0.2'
 
 If your using [Carthage](https://github.com/Carthage/Carthage) you can add a dependency on AlamofireObjectMapper by adding it to your Cartfile:
 ```
-github "tristanhimmelman/AlamofireObjectMapper" ~> 0.2
+github "tristanhimmelman/AlamofireObjectMapper" ~> 0.4
 ```
