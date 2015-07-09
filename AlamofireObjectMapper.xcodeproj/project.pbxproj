@@ -14,14 +14,14 @@
 		6AB2A0171AF26C36001EBB20 /* AlamofireObjectMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB2A0161AF26C36001EBB20 /* AlamofireObjectMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6AB2A01D1AF26C36001EBB20 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A0111AF26C36001EBB20 /* AlamofireObjectMapper.framework */; };
 		6AB2A0241AF26C36001EBB20 /* AlamofireObjectMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A0231AF26C36001EBB20 /* AlamofireObjectMapperTests.swift */; };
-		6AB2A02E1AF2746D001EBB20 /* AlmofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A02D1AF2746D001EBB20 /* AlmofireObjectMapper.swift */; };
+		6AB2A02E1AF2746D001EBB20 /* AlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A02D1AF2746D001EBB20 /* AlamofireObjectMapper.swift */; };
 		6AB2A0901AF27DF1001EBB20 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A0851AF27DF1001EBB20 /* AlamofireObjectMapper.framework */; };
 		6AB2A09E1AF27E6A001EBB20 /* AlamofireObjectMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A0231AF26C36001EBB20 /* AlamofireObjectMapperTests.swift */; };
 		6AB2A0A01AF28166001EBB20 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A09F1AF28166001EBB20 /* ObjectMapper.framework */; };
 		6AB2A0A21AF2816E001EBB20 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A0A11AF2816E001EBB20 /* Alamofire.framework */; };
 		6AB2A0A31AF28176001EBB20 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A0A11AF2816E001EBB20 /* Alamofire.framework */; };
 		6AB2A0A41AF28176001EBB20 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB2A09F1AF28166001EBB20 /* ObjectMapper.framework */; };
-		6AB2A0A51AF282A6001EBB20 /* AlmofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A02D1AF2746D001EBB20 /* AlmofireObjectMapper.swift */; };
+		6AB2A0A51AF282A6001EBB20 /* AlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A02D1AF2746D001EBB20 /* AlamofireObjectMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 		6AB2A01C1AF26C36001EBB20 /* AlamofireObjectMapperTests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AlamofireObjectMapperTests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB2A0221AF26C36001EBB20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AB2A0231AF26C36001EBB20 /* AlamofireObjectMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireObjectMapperTests.swift; sourceTree = "<group>"; };
-		6AB2A02D1AF2746D001EBB20 /* AlmofireObjectMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlmofireObjectMapper.swift; sourceTree = "<group>"; };
+		6AB2A02D1AF2746D001EBB20 /* AlamofireObjectMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireObjectMapper.swift; sourceTree = "<group>"; };
 		6AB2A0851AF27DF1001EBB20 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB2A08F1AF27DF1001EBB20 /* AlamofireObjectMapperTests OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AlamofireObjectMapperTests OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB2A09F1AF28166001EBB20 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/AlamofireObjectMapper-dauotuqewdtvbqbcptlcgtwkqndr/Build/Products/Debug-iphoneos/ObjectMapper.framework"; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				6AB2A0161AF26C36001EBB20 /* AlamofireObjectMapper.h */,
-				6AB2A02D1AF2746D001EBB20 /* AlmofireObjectMapper.swift */,
+				6AB2A02D1AF2746D001EBB20 /* AlamofireObjectMapper.swift */,
 				6AB2A0141AF26C36001EBB20 /* Supporting Files */,
 			);
 			path = AlamofireObjectMapper;
@@ -345,7 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AB2A02E1AF2746D001EBB20 /* AlmofireObjectMapper.swift in Sources */,
+				6AB2A02E1AF2746D001EBB20 /* AlamofireObjectMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AB2A0A51AF282A6001EBB20 /* AlmofireObjectMapper.swift in Sources */,
+				6AB2A0A51AF282A6001EBB20 /* AlamofireObjectMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
