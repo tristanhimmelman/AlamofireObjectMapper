@@ -46,7 +46,7 @@ extension Request {
 	*/
 	public func responseObject<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, NSError?) -> Void) -> Self {
 		
-		return response(queue: queue, serializer: Request.JSONResponseSerializer(options: NSJSONReadingOptions.AllowFragments)) { (request, response, data, error) -> Void in
+		return response(queue: queue, responseSerializer: Request.JSONResponseSerializer(options: NSJSONReadingOptions.AllowFragments)) { (request, response, data, error) -> Void in
 			
 			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
 
@@ -95,7 +95,7 @@ extension Request {
 	*/
 	public func responseArray<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, NSError?) -> Void) -> Self {
 		
-		return response(queue: queue, serializer: Request.JSONResponseSerializer(options: NSJSONReadingOptions.AllowFragments)) { (request, response, data, error) -> Void in
+		return response(queue: queue, responseSerializer: Request.JSONResponseSerializer(options: NSJSONReadingOptions.AllowFragments)) { (request, response, data, error) -> Void in
 			
 			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
 				
