@@ -123,10 +123,8 @@ class WeatherResponse: Mappable {
 	var location: String?
 	var threeDayForecast: [Forecast]?
 	
-	init() {}
-	
-	required init?(_ map: Map) {
-		mapping(map)
+	class func newInstance() -> Mappable {
+		return WeatherResponse()
 	}
 	
 	func mapping(map: Map) {
@@ -140,10 +138,8 @@ class Forecast: Mappable {
 	var temperature: Int?
 	var conditions: String?
 	
-	init() {}
-	
-	required init?(_ map: Map) {
-		mapping(map)
+	class func newInstance() -> Mappable {
+		return Forecast()
 	}
 	
 	func mapping(map: Map) {

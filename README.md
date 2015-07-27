@@ -53,10 +53,8 @@ class WeatherResponse: Mappable {
     var location: String?
     var threeDayForecast: [Forecast]?
     
-    init() {}
-    
-    required init?(_ map: Map) {
-        mapping(map)
+    class func newInstance() -> Mappable {
+        return WeatherResponse()
     }
     
     func mapping(map: Map) {
@@ -70,10 +68,8 @@ class Forecast: Mappable {
     var temperature: Int?
     var conditions: String?
     
-    init() {}
-    
-    required init?(_ map: Map) {
-        mapping(map)
+    class func newInstance() -> Mappable {
+        return Forecast()
     }
     
     func mapping(map: Map) {
@@ -148,10 +144,10 @@ Alamofire.request(.GET, URL, parameters: nil)
 #Installation
 AlamofireObjectMapper can be added to your project using [Cocoapods](https://cocoapods.org/) by adding the following line to your Podfile:
 ```
-pod 'AlamofireObjectMapper', '~> 0.6'
+pod 'AlamofireObjectMapper', '~> 0.7'
 ```
 
 If your using [Carthage](https://github.com/Carthage/Carthage) you can add a dependency on AlamofireObjectMapper by adding it to your Cartfile:
 ```
-github "tristanhimmelman/AlamofireObjectMapper" ~> 0.6
+github "tristanhimmelman/AlamofireObjectMapper" ~> 0.7
 ```
