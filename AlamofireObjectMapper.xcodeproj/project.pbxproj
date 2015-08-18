@@ -267,6 +267,8 @@
 		6AB2A0081AF26C36001EBB20 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Tristan Himmelman";
 				TargetAttributes = {
@@ -470,14 +472,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/build/Debug-iphoneos",
-					"$(PROJECT_DIR)/Carthage/Checkouts/ObjectMapper/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/AlamofireObjectMapper-dauotuqewdtvbqbcptlcgtwkqndr/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = AlamofireObjectMapper/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AlamofireObjectMapper;
 				SKIP_INSTALL = YES;
@@ -496,14 +496,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/build/Debug-iphoneos",
-					"$(PROJECT_DIR)/Carthage/Checkouts/ObjectMapper/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/AlamofireObjectMapper-dauotuqewdtvbqbcptlcgtwkqndr/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = AlamofireObjectMapper/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AlamofireObjectMapper;
 				SKIP_INSTALL = YES;
@@ -516,7 +514,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/AlamofireObjectMapper-dauotuqewdtvbqbcptlcgtwkqndr/Build/Products/Debug-iphoneos",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -534,7 +531,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/AlamofireObjectMapper-dauotuqewdtvbqbcptlcgtwkqndr/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = AlamofireObjectMapperTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

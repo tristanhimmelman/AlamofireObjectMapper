@@ -42,8 +42,8 @@ class AlamofireObjectMapperTests: XCTestCase {
 				XCTAssertNotNil(forecast.temperature, "temperature should not be nil")
 			}
 		}
-		
-		waitForExpectationsWithTimeout(10, handler: { (error: NSError!) -> Void in
+        
+		waitForExpectationsWithTimeout(10, handler: { (error: NSError?) -> Void in
 			XCTAssertNil(error, "\(error)")
 		})
     }
@@ -69,7 +69,7 @@ class AlamofireObjectMapperTests: XCTestCase {
 			}
 		}
 		
-		waitForExpectationsWithTimeout(10, handler: { (error: NSError!) -> Void in
+		waitForExpectationsWithTimeout(10, handler: { (error: NSError?) -> Void in
 			XCTAssertNil(error, "\(error)")
 		})
 	}
@@ -91,7 +91,7 @@ class AlamofireObjectMapperTests: XCTestCase {
 			}
 		}
 		
-		waitForExpectationsWithTimeout(10, handler: { (error: NSError!) -> Void in
+		waitForExpectationsWithTimeout(10, handler: { (error: NSError?) -> Void in
 			XCTAssertNil(error, "\(error)")
 		})
 	}
@@ -113,7 +113,7 @@ class AlamofireObjectMapperTests: XCTestCase {
 			}
 		}
 		
-		waitForExpectationsWithTimeout(10, handler: { (error: NSError!) -> Void in
+		waitForExpectationsWithTimeout(10, handler: { (error: NSError?) -> Void in
 			XCTAssertNil(error, "\(error)")
 		})
 	}
