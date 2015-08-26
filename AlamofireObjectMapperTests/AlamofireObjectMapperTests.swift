@@ -29,7 +29,7 @@ class AlamofireObjectMapperTests: XCTestCase {
 		let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
 		let expectation = expectationWithDescription("\(URL)")
 
-		Alamofire.request(.GET, URL, parameters: nil).responseObject { (response: WeatherResponse?, error: NSError?) in
+		Alamofire.request(.GET, URL, parameters: nil).responseObject { (response: WeatherResponse?, error: ErrorType?) in
 			expectation.fulfill()
 
 			XCTAssertNotNil(response, "Response should not be nil")
@@ -54,7 +54,7 @@ class AlamofireObjectMapperTests: XCTestCase {
 		let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
 		let expectation = expectationWithDescription("\(URL)")
 		
-		Alamofire.request(.GET, URL, parameters: nil).responseObject { (request: NSURLRequest, HTTPURLResponse: NSHTTPURLResponse?, response: WeatherResponse?, data: AnyObject?, error: NSError?) in
+		Alamofire.request(.GET, URL, parameters: nil).responseObject { (request: NSURLRequest, HTTPURLResponse: NSHTTPURLResponse?, response: WeatherResponse?, data: AnyObject?, error: ErrorType?) in
 			
 			expectation.fulfill()
 			
@@ -79,7 +79,7 @@ class AlamofireObjectMapperTests: XCTestCase {
 		let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
 		let expectation = expectationWithDescription("\(URL)")
 		
-		Alamofire.request(.GET, URL, parameters: nil).responseArray { (response: [Forecast]?, error: NSError?) in
+		Alamofire.request(.GET, URL, parameters: nil).responseArray { (response: [Forecast]?, error: ErrorType?) in
 			expectation.fulfill()
 			
 			XCTAssertNotNil(response, "Response should not be nil")
@@ -101,7 +101,7 @@ class AlamofireObjectMapperTests: XCTestCase {
 		let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
 		let expectation = expectationWithDescription("\(URL)")
 		
-		Alamofire.request(.GET, URL, parameters: nil).responseArray { (request: NSURLRequest, HTTPURLResponse: NSHTTPURLResponse?, response: [Forecast]?, data: AnyObject?, error: NSError?) in
+		Alamofire.request(.GET, URL, parameters: nil).responseArray { (request: NSURLRequest, HTTPURLResponse: NSHTTPURLResponse?, response: [Forecast]?, data: AnyObject?, error: ErrorType?) in
 			expectation.fulfill()
 			
 			XCTAssertNotNil(response, "Response should not be nil")
@@ -123,7 +123,7 @@ class WeatherResponse: Mappable {
 	var location: String?
 	var threeDayForecast: [Forecast]?
 	
-	class func newInstance() -> Mappable {
+	class func newInstance(map: Map) -> Mappable? {
 		return WeatherResponse()
 	}
 	
@@ -138,7 +138,7 @@ class Forecast: Mappable {
 	var temperature: Int?
 	var conditions: String?
 	
-	class func newInstance() -> Mappable {
+	class func newInstance(map: Map) -> Mappable? {
 		return Forecast()
 	}
 	

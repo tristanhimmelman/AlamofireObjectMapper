@@ -19,7 +19,7 @@ extension Request {
 	
 	- returns: The request.
 	*/
-	public func responseObject<T: Mappable>(completionHandler: (T?, NSError?) -> Void) -> Self {
+	public func responseObject<T: Mappable>(completionHandler: (T?, ErrorType?) -> Void) -> Self {
 		return responseObject(nil) { (request, response, object, data, error) -> Void in
 			completionHandler(object, error)
 		}
@@ -32,7 +32,7 @@ extension Request {
 	
 	- returns: The request.
 	*/
-	public func responseObject<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, NSError?) -> Void) -> Self {
+	public func responseObject<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self {
 		return responseObject(nil, completionHandler: completionHandler)
 	}
 	
@@ -44,7 +44,7 @@ extension Request {
 	
 	- returns: The request.
 	*/
-	public func responseObject<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, NSError?) -> Void) -> Self {
+	public func responseObject<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self {
 		
 		return response(queue: queue, responseSerializer: Request.JSONResponseSerializer(options: NSJSONReadingOptions.AllowFragments)) { (request, response, result) -> Void in
 			
@@ -69,7 +69,7 @@ extension Request {
 	
 	- returns: The request.
 	*/
-	public func responseArray<T: Mappable>(completionHandler: ([T]?, NSError?) -> Void) -> Self {
+	public func responseArray<T: Mappable>(completionHandler: ([T]?, ErrorType?) -> Void) -> Self {
 		return responseArray(nil) { (request, response, object, data, error) -> Void in
 			completionHandler(object, error)
 		}
@@ -82,7 +82,7 @@ extension Request {
 	
 	- returns: The request.
 	*/
-	public func responseArray<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, NSError?) -> Void) -> Self {
+	public func responseArray<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, ErrorType?) -> Void) -> Self {
 		return responseArray(nil, completionHandler: completionHandler)
 	}
 	
@@ -94,7 +94,7 @@ extension Request {
 	
 	- returns: The request.
 	*/
-	public func responseArray<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, NSError?) -> Void) -> Self {
+	public func responseArray<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, ErrorType?) -> Void) -> Self {
 		
 		return response(queue: queue, responseSerializer: Request.JSONResponseSerializer(options: NSJSONReadingOptions.AllowFragments)) { (request, response, result) -> Void in
 			
