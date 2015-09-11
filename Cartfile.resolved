@@ -1,2 +1,2 @@
-github "Alamofire/Alamofire" "1bc35abfa7c167ba54af4e87158af7945cc9984e"
-github "Hearst-DD/ObjectMapper" "a666f2913afd0320fc7f631a3a54098d3b378a8e"
+github "Alamofire/Alamofire" "2.0.0"
+github "Hearst-DD/ObjectMapper" "0.16"
