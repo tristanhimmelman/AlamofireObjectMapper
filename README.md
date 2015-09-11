@@ -35,7 +35,7 @@ You can use this extension as the follows:
 ```swift
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
 Alamofire.request(.GET, URL, parameters: nil)
-         .responseObject { (response: WeatherResponse?, error: NSError?) in
+         .responseObject { (response: WeatherResponse?, error: ErrorType?) in
             println(response?.location)
             if let threeDayForecast = response?.threeDayForecast {
                 for forecast in threeDayForecast {
@@ -53,9 +53,9 @@ class WeatherResponse: Mappable {
     var location: String?
     var threeDayForecast: [Forecast]?
     
-    class func newInstance() -> Mappable {
-        return WeatherResponse()
-    }
+	required init?(_ map: Map){
+
+	}
     
     func mapping(map: Map) {
         location <- map["location"]
@@ -68,9 +68,9 @@ class Forecast: Mappable {
     var temperature: Int?
     var conditions: String?
     
-    class func newInstance() -> Mappable {
-        return Forecast()
-    }
+	required init?(_ map: Map){
+
+	}
     
     func mapping(map: Map) {
         day <- map["day"]
@@ -83,28 +83,28 @@ class Forecast: Mappable {
 The extension uses Generics to allow you to create your own custom response objects. Below are the three functions which you can use to have your responses mapped to objects. Just replace `T` with your custom response object and the extension handles the rest: 
 
 ```swift
-func responseObject<T: Mappable>(completionHandler: (T?, NSError?) -> Void) -> Self
+func responseObject<T: Mappable>(completionHandler: (T?, ErrorType?) -> Void) -> Self
 ```
 
 ```swift
-func responseObject<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, NSError?) -> Void) -> Self
+func responseObject<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self
 ```
 
 ```swift
-func responseObject<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, NSError?) -> Void) -> Self
+func responseObject<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self
 ```
 #Array Responses
 If you have an endpoint that returns data in `Array` form you can map it with the following functions:
 ```swift
-func responseArray<T: Mappable>(completionHandler: ([T]?, NSError?) -> Void) -> Self
+func responseArray<T: Mappable>(completionHandler: ([T]?, ErrorType?) -> Void) -> Self
 ```
 
 ```swift
-func responseArray<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, NSError?) -> Void) -> Self
+func responseArray<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, ErrorType?) -> Void) -> Self
 ```
 
 ```swift
-func responseArray<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, NSError?) -> Void) -> Self
+func responseArray<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, ErrorType?) -> Void) -> Self
 ```
 For example, if your endpoint returns the following:
 ```
@@ -130,7 +130,7 @@ You can request and map it as follows:
 ```swift
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
 Alamofire.request(.GET, URL, parameters: nil)
-         .responseArray { (response: [Forecast]?, error: NSError?) in
+         .responseArray { (response: [Forecast]?, error: ErrorType?) in
             println(response?.location)
             if let response = response {
                 for forecast in response {
@@ -144,10 +144,10 @@ Alamofire.request(.GET, URL, parameters: nil)
 #Installation
 AlamofireObjectMapper can be added to your project using [Cocoapods](https://cocoapods.org/) by adding the following line to your Podfile:
 ```
-pod 'AlamofireObjectMapper', '~> 0.7'
+pod 'AlamofireObjectMapper', '~> 0.8'
 ```
 
 If your using [Carthage](https://github.com/Carthage/Carthage) you can add a dependency on AlamofireObjectMapper by adding it to your Cartfile:
 ```
-github "tristanhimmelman/AlamofireObjectMapper" ~> 0.7
+github "tristanhimmelman/AlamofireObjectMapper" ~> 0.8
 ```
