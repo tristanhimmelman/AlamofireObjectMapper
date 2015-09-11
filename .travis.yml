@@ -14,12 +14,12 @@ env:
 
 before_install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
-  - brew install carthage --quiet
+  # - brew install carthage --quiet
   # - brew update
   # - brew outdated xctool || brew upgrade xctool
 
 script: 
-  - carthage checkout
+  # - carthage checkout
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -workspace $XCODE_WORKSPACE -scheme "$SCHEME" -sdk "$SDK" test | xcpretty -c
