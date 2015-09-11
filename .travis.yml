@@ -7,8 +7,8 @@ env:
     - LC_ALL=en_US.UTF-8
     - XCODE_WORKSPACE=AlamofireObjectMapper.xcworkspace
   matrix:
-    - SCRIPT="xcodebuild -workspace $XCODE_WORKSPACE -scheme AlamofireObjectMapper\ iOS -sdk iphonesimulator test"
-    - SCRIPT="xcodebuild -workspace $XCODE_WORKSPACE -scheme AlamofireObjectMapper\ OSX test"
+    - SCRIPT="xcodebuild -workspace $XCODE_WORKSPACE -scheme 'AlamofireObjectMapper iOS' -sdk iphonesimulator test"
+    - SCRIPT="xcodebuild -workspace $XCODE_WORKSPACE -scheme 'AlamofireObjectMapper OSX' test"
     # - SCRIPT="xctool -workspace $XCODE_WORKSPACE -scheme AlamofireObjectMapper\ iOS -sdk iphonesimulator test"
     # - SCRIPT="xctool -workspace $XCODE_WORKSPACE -scheme AlamofireObjectMapper\ OSX test"
 
@@ -20,4 +20,3 @@ script: $SCRIPT
 
 notifications:
   email: false
-  
