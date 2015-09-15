@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Tristan Himmelman. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for AlamofireObjectMapper.
 FOUNDATION_EXPORT double AlamofireObjectMapperVersionNumber;

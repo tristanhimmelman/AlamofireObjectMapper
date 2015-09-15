@@ -9,8 +9,6 @@ env:
   matrix:
     - SCHEME="AlamofireObjectMapper iOS" SDK="iphonesimulator"
     - SCHEME="AlamofireObjectMapper OSX" SDK="macosx"
-    # - SCRIPT="xctool -workspace $XCODE_WORKSPACE -scheme AlamofireObjectMapper\ iOS -sdk iphonesimulator test"
-    # - SCRIPT="xctool -workspace $XCODE_WORKSPACE -scheme AlamofireObjectMapper\ OSX test"
 
 before_install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
