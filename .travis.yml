@@ -8,16 +8,12 @@ env:
     - XCODE_WORKSPACE=AlamofireObjectMapper.xcworkspace
   matrix:
     - SCHEME="AlamofireObjectMapper iOS" SDK="iphonesimulator"
-    - SCHEME="AlamofireObjectMapper OSX" SDK="macosx"
+    # - SCHEME="AlamofireObjectMapper OSX" SDK="macosx"
 
 before_install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
-  - brew install carthage --quiet
-  # - brew update
-  # - brew outdated xctool || brew upgrade xctool
 
 script: 
-  - carthage build
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -workspace $XCODE_WORKSPACE -scheme "$SCHEME" -sdk "$SDK" -configuration Debug ONLY_ACTIVE_ARCH=NO test | xcpretty -c
