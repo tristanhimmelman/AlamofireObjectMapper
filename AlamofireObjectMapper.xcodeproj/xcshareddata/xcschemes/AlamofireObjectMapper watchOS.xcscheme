@@ -14,40 +14,21 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6AB2A0101AF26C36001EBB20"
+               BlueprintIdentifier = "6AC4580B1BA34C5600054758"
                BuildableName = "AlamofireObjectMapper.framework"
-               BlueprintName = "AlamofireObjectMapper iOS"
+               BlueprintName = "AlamofireObjectMapper watchOS"
                ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6AB2A01B1AF26C36001EBB20"
-               BuildableName = "AlamofireObjectMapperTests iOS.xctest"
-               BlueprintName = "AlamofireObjectMapperTests iOS"
-               ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6AB2A0101AF26C36001EBB20"
-            BuildableName = "AlamofireObjectMapper.framework"
-            BlueprintName = "AlamofireObjectMapper iOS"
-            ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6AB2A0101AF26C36001EBB20"
+            BlueprintIdentifier = "6AC4580B1BA34C5600054758"
             BuildableName = "AlamofireObjectMapper.framework"
-            BlueprintName = "AlamofireObjectMapper iOS"
+            BlueprintName = "AlamofireObjectMapper watchOS"
             ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6AB2A0101AF26C36001EBB20"
+            BlueprintIdentifier = "6AC4580B1BA34C5600054758"
             BuildableName = "AlamofireObjectMapper.framework"
-            BlueprintName = "AlamofireObjectMapper iOS"
+            BlueprintName = "AlamofireObjectMapper watchOS"
             ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
