@@ -9,9 +9,24 @@
 import Foundation
 import Alamofire
 import ObjectMapper
+import ObjectiveC
+
+private var xoAssociationKey: UInt8 = 0
 
 extension Request {
 	
+    /*
+    We need to add a stored property for path
+    */
+    var path: String? {
+        get {
+            return objc_getAssociatedObject(self, &xoAssociationKey) as! String?
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &xoAssociationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
 	/**
 	Adds a handler to be called once the request has finished.
 	
@@ -19,6 +34,7 @@ extension Request {
 	
 	- returns: The request.
 	*/
+    
 	public func responseObject<T: Mappable>(completionHandler: (T?, ErrorType?) -> Void) -> Self {
 		return responseObject(nil) { (request, response, object, data, error) -> Void in
 			completionHandler(object, error)
@@ -50,8 +66,7 @@ extension Request {
 			
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                
-                let parsedObject = Mapper<T>().map(result.value)
+                let parsedObject = Mapper<T>().map(self.path != nil ? result.value?[self.path!] : result.value)
                 
                 dispatch_async(queue ?? dispatch_get_main_queue()) {
                     completionHandler(self.request!, self.response, parsedObject, result.value ?? result.data, result.error)
@@ -100,8 +115,7 @@ extension Request {
 			
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                 
-                let parsedObject = Mapper<T>().mapArray(result.value)
-                
+                let parsedObject = Mapper<T>().mapArray(self.path != nil ? result.value?[self.path!] : result.value)
                 dispatch_async(queue ?? dispatch_get_main_queue()) {
                     completionHandler(self.request!, self.response, parsedObject, result.value ?? result.data, result.error)
                 }
