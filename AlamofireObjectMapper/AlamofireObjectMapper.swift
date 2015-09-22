@@ -18,7 +18,7 @@ extension Request {
     /*
     We need to add a stored property for path
     */
-    var keyPath: String? {
+    public var keyPath: String? {
         get {
             return objc_getAssociatedObject(self, &xoAssociationKey) as! String?
         }
