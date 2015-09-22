@@ -18,7 +18,7 @@ extension Request {
     /*
     We need to add a stored property for path
     */
-    var path: String? {
+    var keyPath: String? {
         get {
             return objc_getAssociatedObject(self, &xoAssociationKey) as! String?
         }
@@ -66,7 +66,7 @@ extension Request {
 			
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                let parsedObject = Mapper<T>().map(self.path != nil ? result.value?[self.path!] : result.value)
+                let parsedObject = Mapper<T>().map(self.keyPath != nil ? result.value?[self.keyPath!] : result.value)
                 
                 dispatch_async(queue ?? dispatch_get_main_queue()) {
                     completionHandler(self.request!, self.response, parsedObject, result.value ?? result.data, result.error)
@@ -115,7 +115,7 @@ extension Request {
 			
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                 
-                let parsedObject = Mapper<T>().mapArray(self.path != nil ? result.value?[self.path!] : result.value)
+                let parsedObject = Mapper<T>().mapArray(self.keyPath != nil ? result.value?[self.keyPath!] : result.value)
                 dispatch_async(queue ?? dispatch_get_main_queue()) {
                     completionHandler(self.request!, self.response, parsedObject, result.value ?? result.data, result.error)
                 }
