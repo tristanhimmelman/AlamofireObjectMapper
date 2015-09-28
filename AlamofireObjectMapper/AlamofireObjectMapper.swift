@@ -11,22 +11,9 @@ import Alamofire
 import ObjectMapper
 import ObjectiveC
 
-private var xoAssociationKey: UInt8 = 0
 
 extension Request {
 	
-    /*
-    We need to add a stored property for path
-    */
-    public var keyPath: String? {
-        get {
-            return objc_getAssociatedObject(self, &xoAssociationKey) as! String?
-        }
-        set(newValue) {
-            objc_setAssociatedObject(self, &xoAssociationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-    
 	/**
 	Adds a handler to be called once the request has finished.
 	
@@ -35,8 +22,8 @@ extension Request {
 	- returns: The request.
 	*/
     
-	public func responseObject<T: Mappable>(completionHandler: (T?, ErrorType?) -> Void) -> Self {
-		return responseObject(nil) { (request, response, object, data, error) -> Void in
+    public func responseObject<T: Mappable>(keyPath: String?,completionHandler: (T?, ErrorType?) -> Void) -> Self {
+		return responseObject(nil,keyPath: keyPath) { (request, response, object, data, error) -> Void in
 			completionHandler(object, error)
 		}
 	}
@@ -48,8 +35,8 @@ extension Request {
 	
 	- returns: The request.
 	*/
-	public func responseObject<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self {
-		return responseObject(nil, completionHandler: completionHandler)
+    public func responseObject<T: Mappable>(keyPath: String?,completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self {
+        return responseObject(nil, keyPath: keyPath, completionHandler: completionHandler)
 	}
 	
 	/**
@@ -60,13 +47,13 @@ extension Request {
 	
 	- returns: The request.
 	*/
-	public func responseObject<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self {
+    public func responseObject<T: Mappable>(queue: dispatch_queue_t?, keyPath: String?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self {
 		
 		return response(queue: queue, responseSerializer: Request.JSONResponseSerializer(options: NSJSONReadingOptions.AllowFragments)) { (request, response, result) -> Void in
 			
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                let parsedObject = Mapper<T>().map(self.keyPath != nil ? result.value?[self.keyPath!] : result.value)
+                let parsedObject = Mapper<T>().map(keyPath != nil ? result.value?[keyPath!] : result.value)
                 
                 dispatch_async(queue ?? dispatch_get_main_queue()) {
                     completionHandler(self.request!, self.response, parsedObject, result.value ?? result.data, result.error)
@@ -84,8 +71,8 @@ extension Request {
 	
 	- returns: The request.
 	*/
-	public func responseArray<T: Mappable>(completionHandler: ([T]?, ErrorType?) -> Void) -> Self {
-		return responseArray(nil) { (request, response, object, data, error) -> Void in
+	public func responseArray<T: Mappable>(keyPath: String?,completionHandler: ([T]?, ErrorType?) -> Void) -> Self {
+        return responseArray(nil,keyPath: keyPath) { (request, response, object, data, error) -> Void in
 			completionHandler(object, error)
 		}
 	}
@@ -97,8 +84,8 @@ extension Request {
 	
 	- returns: The request.
 	*/
-	public func responseArray<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, ErrorType?) -> Void) -> Self {
-		return responseArray(nil, completionHandler: completionHandler)
+	public func responseArray<T: Mappable>(keyPath: String?,completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, ErrorType?) -> Void) -> Self {
+        return responseArray(nil,keyPath: keyPath, completionHandler: completionHandler)
 	}
 	
 	/**
@@ -109,13 +96,13 @@ extension Request {
 	
 	- returns: The request.
 	*/
-	public func responseArray<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, ErrorType?) -> Void) -> Self {
+    public func responseArray<T: Mappable>(queue: dispatch_queue_t?, keyPath: String?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, ErrorType?) -> Void) -> Self {
 		
 		return response(queue: queue, responseSerializer: Request.JSONResponseSerializer(options: NSJSONReadingOptions.AllowFragments)) { (request, response, result) -> Void in
 			
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                 
-                let parsedObject = Mapper<T>().mapArray(self.keyPath != nil ? result.value?[self.keyPath!] : result.value)
+                let parsedObject = Mapper<T>().mapArray(keyPath != nil ? result.value?[keyPath!] : result.value)
                 dispatch_async(queue ?? dispatch_get_main_queue()) {
                     completionHandler(self.request!, self.response, parsedObject, result.value ?? result.data, result.error)
                 }
