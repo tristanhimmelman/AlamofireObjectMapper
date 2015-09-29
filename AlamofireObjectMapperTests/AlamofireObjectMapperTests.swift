@@ -119,7 +119,7 @@ class AlamofireObjectMapperTests: XCTestCase {
 		})
 	}
     
-    func testArrayResponseObjectWithKeyPath() {
+    func testArrayResponseArrayWithKeyPath() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
         let expectation = expectationWithDescription("\(URL)")
