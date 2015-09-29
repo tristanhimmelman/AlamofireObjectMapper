@@ -47,7 +47,8 @@ class AlamofireObjectMapperTests: XCTestCase {
 			XCTAssertNil(error, "\(error)")
 		})
     }
-	
+    
+    
 	func testResponseObject2() {
 		// This is an example of a functional test case.
 		
@@ -117,6 +118,30 @@ class AlamofireObjectMapperTests: XCTestCase {
 			XCTAssertNil(error, "\(error)")
 		})
 	}
+    
+    func testArrayResponseArrayWithKeyPath() {
+        // This is an example of a functional test case.
+        let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
+        let expectation = expectationWithDescription("\(URL)")
+        
+        Alamofire.request(.GET, URL, parameters: nil).responseArray ("three_day_forecast", completionHandler: { (request: NSURLRequest, HTTPURLResponse: NSHTTPURLResponse?, response: [Forecast]?, data: AnyObject?, error: ErrorType?) in
+            expectation.fulfill()
+            
+            XCTAssertNotNil(response, "Response should not be nil")
+            
+            for forecast in response! {
+                XCTAssertNotNil(forecast.day, "day should not be nil")
+                XCTAssertNotNil(forecast.conditions, "conditions should not be nil")
+                XCTAssertNotNil(forecast.temperature, "temperature should not be nil")
+            }
+        })
+        
+        waitForExpectationsWithTimeout(10, handler: { (error: NSError?) -> Void in
+            XCTAssertNil(error, "\(error)")
+        })
+    }
+
+
 }
 
 class WeatherResponse: Mappable {
