@@ -62,7 +62,7 @@ extension Request {
      
      - returns: The request.
      */
-    public func responseObject<T: Mappable>(keyPath: String?,completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self {
+    public func responseObject<T: Mappable>(keyPath: String?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self {
         return responseObject(nil, keyPath: keyPath, completionHandler: completionHandler)
     }
     
@@ -90,8 +90,8 @@ extension Request {
                 }
             }
         }
-        
     }
+    
 
     // MARK: Array responses
     
@@ -171,9 +171,5 @@ extension Request {
                 }
             }
         }
-        
-      
     }
-    
-    
 }
