@@ -38,11 +38,11 @@ You can use this extension as the follows:
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
 Alamofire.request(.GET, URL, parameters: nil)
          .responseObject { (response: WeatherResponse?, error: ErrorType?) in
-            println(response?.location)
+            print(response?.location)
             if let threeDayForecast = response?.threeDayForecast {
                 for forecast in threeDayForecast {
-                    println(forecast.day)
-                    println(forecast.temperature)           
+                    print(forecast.day)
+                    print(forecast.temperature)           
                 }
             }
 }
@@ -133,11 +133,10 @@ You can request and map it as follows:
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
 Alamofire.request(.GET, URL, parameters: nil)
          .responseArray { (response: [Forecast]?, error: ErrorType?) in
-            println(response?.location)
             if let response = response {
                 for forecast in response {
-                    println(forecast.day)
-                    println(forecast.temperature)           
+                    print(forecast.day)
+                    print(forecast.temperature)           
                 }
             }
 }
