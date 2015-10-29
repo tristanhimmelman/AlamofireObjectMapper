@@ -74,7 +74,7 @@ extension Request {
      
      - returns: The request.
      */
-    public func responseTestObject<T: Mappable>(completionHandler: (Response<T, NSError>) -> Void) -> Self {
+    public func responseObject<T: Mappable>(completionHandler: (Response<T, NSError>) -> Void) -> Self {
         return responseObject(nil, keyPath: nil, completionHandler: completionHandler)
     }
     
@@ -87,7 +87,7 @@ extension Request {
      
      - returns: The request.
      */
-    public func responseTestObject<T: Mappable>(keyPath: String?, completionHandler: (Response<T, NSError>) -> Void) -> Self {
+    public func responseObject<T: Mappable>(keyPath: String?, completionHandler: (Response<T, NSError>) -> Void) -> Self {
         return responseObject(nil, keyPath: keyPath, completionHandler: completionHandler)
     }
     
