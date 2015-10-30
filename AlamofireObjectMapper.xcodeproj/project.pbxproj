@@ -14,6 +14,12 @@
 		6AB2A09E1AF27E6A001EBB20 /* AlamofireObjectMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A0231AF26C36001EBB20 /* AlamofireObjectMapperTests.swift */; };
 		6AB2A0A51AF282A6001EBB20 /* AlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A02D1AF2746D001EBB20 /* AlamofireObjectMapper.swift */; };
 		6AC458181BA34EFD00054758 /* AlamofireObjectMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB2A0161AF26C36001EBB20 /* AlamofireObjectMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6AC692171BE3F7F6004C119A /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC692061BE3F69E004C119A /* AlamofireObjectMapper.framework */; };
+		6AC6921D1BE3F857004C119A /* AlamofireObjectMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A0231AF26C36001EBB20 /* AlamofireObjectMapperTests.swift */; };
+		6AC6921E1BE3F96B004C119A /* AlamofireObjectMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB2A0161AF26C36001EBB20 /* AlamofireObjectMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6AC692231BE3F9AE004C119A /* AlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A02D1AF2746D001EBB20 /* AlamofireObjectMapper.swift */; };
+		6AC692321BE3FCB1004C119A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC692301BE3FCB1004C119A /* Alamofire.framework */; };
+		6AC692331BE3FCB1004C119A /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC692311BE3FCB1004C119A /* ObjectMapper.framework */; };
 		6AC787651BA86CA3007BBD2B /* AlamofireObjectMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB2A0161AF26C36001EBB20 /* AlamofireObjectMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6AC787661BA871C4007BBD2B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A905E3A1B067CAC00884083 /* Alamofire.framework */; };
 		6AC787671BA871C4007BBD2B /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A905E3B1B067CAC00884083 /* ObjectMapper.framework */; };
@@ -39,6 +45,13 @@
 			remoteGlobalIDString = 6AB2A0841AF27DF1001EBB20;
 			remoteInfo = "AlamofireObjectMapper OSX";
 		};
+		6AC692181BE3F7F6004C119A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6AB2A0081AF26C36001EBB20 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AC692051BE3F69E004C119A;
+			remoteInfo = "AlamofireObjectMapper tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +71,12 @@
 		6AB2A09F1AF28166001EBB20 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/AlamofireObjectMapper-dauotuqewdtvbqbcptlcgtwkqndr/Build/Products/Debug-iphoneos/ObjectMapper.framework"; sourceTree = "<group>"; };
 		6AB2A0A11AF2816E001EBB20 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/AlamofireObjectMapper-dauotuqewdtvbqbcptlcgtwkqndr/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		6AC4580C1BA34C5600054758 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AC692061BE3F69E004C119A /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AC692121BE3F7F5004C119A /* AlamofireObjectMapperTests tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AlamofireObjectMapperTests tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AC6922C1BE3FA55004C119A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Carthage/Checkouts/Alamofire/build/Debug-appletvos/Alamofire.framework"; sourceTree = "<group>"; };
+		6AC6922D1BE3FA55004C119A /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "Carthage/Checkouts/ObjectMapper/build/Debug-appletvos/ObjectMapper.framework"; sourceTree = "<group>"; };
+		6AC692301BE3FCB1004C119A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Carthage/Checkouts/Alamofire/build/Debug-appletvos/Alamofire.framework"; sourceTree = "<group>"; };
+		6AC692311BE3FCB1004C119A /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "Carthage/Checkouts/ObjectMapper/build/Debug-appletvos/ObjectMapper.framework"; sourceTree = "<group>"; };
 		6AC7876A1BA87221007BBD2B /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/Mac/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
 		6AC7876C1BA8726F007BBD2B /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/watchOS/Alamofire.framework; sourceTree = "<group>"; };
 		6AC7876D1BA8726F007BBD2B /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/watchOS/ObjectMapper.framework; sourceTree = "<group>"; };
@@ -107,12 +126,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6AC692021BE3F69E004C119A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AC692321BE3FCB1004C119A /* Alamofire.framework in Frameworks */,
+				6AC692331BE3FCB1004C119A /* ObjectMapper.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AC6920F1BE3F7F5004C119A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AC692171BE3F7F6004C119A /* AlamofireObjectMapper.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		6A905E3E1B067CBC00884083 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6AC692301BE3FCB1004C119A /* Alamofire.framework */,
+				6AC692311BE3FCB1004C119A /* ObjectMapper.framework */,
+				6AC6922C1BE3FA55004C119A /* Alamofire.framework */,
+				6AC6922D1BE3FA55004C119A /* ObjectMapper.framework */,
 				6AC7876C1BA8726F007BBD2B /* Alamofire.framework */,
 				6AC7876D1BA8726F007BBD2B /* ObjectMapper.framework */,
 				6AC7876A1BA87221007BBD2B /* AlamofireObjectMapper.framework */,
@@ -142,6 +182,8 @@
 				6AB2A0851AF27DF1001EBB20 /* AlamofireObjectMapper.framework */,
 				6AB2A08F1AF27DF1001EBB20 /* AlamofireObjectMapperTests OSX.xctest */,
 				6AC4580C1BA34C5600054758 /* AlamofireObjectMapper.framework */,
+				6AC692061BE3F69E004C119A /* AlamofireObjectMapper.framework */,
+				6AC692121BE3F7F5004C119A /* AlamofireObjectMapperTests tvOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,6 +249,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AC458181BA34EFD00054758 /* AlamofireObjectMapper.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AC692031BE3F69E004C119A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AC6921E1BE3F96B004C119A /* AlamofireObjectMapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +351,42 @@
 			productReference = 6AC4580C1BA34C5600054758 /* AlamofireObjectMapper.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		6AC692051BE3F69E004C119A /* AlamofireObjectMapper tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AC6920B1BE3F69E004C119A /* Build configuration list for PBXNativeTarget "AlamofireObjectMapper tvOS" */;
+			buildPhases = (
+				6AC692011BE3F69E004C119A /* Sources */,
+				6AC692021BE3F69E004C119A /* Frameworks */,
+				6AC692031BE3F69E004C119A /* Headers */,
+				6AC692041BE3F69E004C119A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AlamofireObjectMapper tvOS";
+			productName = "AlamofireObjectMapper tvOS";
+			productReference = 6AC692061BE3F69E004C119A /* AlamofireObjectMapper.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		6AC692111BE3F7F5004C119A /* AlamofireObjectMapperTests tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AC6921A1BE3F7F6004C119A /* Build configuration list for PBXNativeTarget "AlamofireObjectMapperTests tvOS" */;
+			buildPhases = (
+				6AC6920E1BE3F7F5004C119A /* Sources */,
+				6AC6920F1BE3F7F5004C119A /* Frameworks */,
+				6AC692101BE3F7F5004C119A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6AC692191BE3F7F6004C119A /* PBXTargetDependency */,
+			);
+			name = "AlamofireObjectMapperTests tvOS";
+			productName = "AlamofireObjectMapperTests tvOS";
+			productReference = 6AC692121BE3F7F5004C119A /* AlamofireObjectMapperTests tvOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -309,7 +395,7 @@
 			attributes = {
 				CLASSPREFIX = "";
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Tristan Himmelman";
 				TargetAttributes = {
@@ -328,6 +414,12 @@
 					6AC4580B1BA34C5600054758 = {
 						CreatedOnToolsVersion = 7.0;
 					};
+					6AC692051BE3F69E004C119A = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					6AC692111BE3F7F5004C119A = {
+						CreatedOnToolsVersion = 7.1;
+					};
 				};
 			};
 			buildConfigurationList = 6AB2A00B1AF26C36001EBB20 /* Build configuration list for PBXProject "AlamofireObjectMapper" */;
@@ -345,8 +437,10 @@
 				6AB2A0101AF26C36001EBB20 /* AlamofireObjectMapper iOS */,
 				6AB2A0841AF27DF1001EBB20 /* AlamofireObjectMapper OSX */,
 				6AC4580B1BA34C5600054758 /* AlamofireObjectMapper watchOS */,
+				6AC692051BE3F69E004C119A /* AlamofireObjectMapper tvOS */,
 				6AB2A01B1AF26C36001EBB20 /* AlamofireObjectMapperTests iOS */,
 				6AB2A08E1AF27DF1001EBB20 /* AlamofireObjectMapperTests OSX */,
+				6AC692111BE3F7F5004C119A /* AlamofireObjectMapperTests tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -367,6 +461,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6AC4580A1BA34C5600054758 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AC692041BE3F69E004C119A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AC692101BE3F7F5004C119A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -415,6 +523,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6AC692011BE3F69E004C119A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AC692231BE3F9AE004C119A /* AlamofireObjectMapper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AC6920E1BE3F7F5004C119A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AC6921D1BE3F857004C119A /* AlamofireObjectMapperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -427,6 +551,11 @@
 			isa = PBXTargetDependency;
 			target = 6AB2A0841AF27DF1001EBB20 /* AlamofireObjectMapper OSX */;
 			targetProxy = 6AB2A0911AF27DF1001EBB20 /* PBXContainerItemProxy */;
+		};
+		6AC692191BE3F7F6004C119A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6AC692051BE3F69E004C119A /* AlamofireObjectMapper tvOS */;
+			targetProxy = 6AC692181BE3F7F6004C119A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -721,7 +850,7 @@
 				INFOPLIST_FILE = AlamofireObjectMapper/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hearst.AlamofireObjectMapper;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tristanhimmelman.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = AlamofireObjectMapper;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -744,12 +873,86 @@
 				INFOPLIST_FILE = AlamofireObjectMapper/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hearst.AlamofireObjectMapper;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tristanhimmelman.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = AlamofireObjectMapper;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		6AC6920C1BE3F69E004C119A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = AlamofireObjectMapper/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tristanhimmelman.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = AlamofireObjectMapper;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		6AC6920D1BE3F69E004C119A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = AlamofireObjectMapper/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tristanhimmelman.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = AlamofireObjectMapper;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
+		6AC6921B1BE3F7F6004C119A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = AlamofireObjectMapperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tristanhimmelman.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		6AC6921C1BE3F7F6004C119A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AlamofireObjectMapperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tristanhimmelman.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -809,6 +1012,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6AC6920B1BE3F69E004C119A /* Build configuration list for PBXNativeTarget "AlamofireObjectMapper tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AC6920C1BE3F69E004C119A /* Debug */,
+				6AC6920D1BE3F69E004C119A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6AC6921A1BE3F7F6004C119A /* Build configuration list for PBXNativeTarget "AlamofireObjectMapperTests tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AC6921B1BE3F7F6004C119A /* Debug */,
+				6AC6921C1BE3F7F6004C119A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
