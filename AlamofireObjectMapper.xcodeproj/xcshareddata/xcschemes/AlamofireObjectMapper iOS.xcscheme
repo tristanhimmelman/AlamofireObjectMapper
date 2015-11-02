@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6AC692111BE3F7F5004C119A"
-               BuildableName = "AlamofireObjectMapperTests tvOS.xctest"
-               BlueprintName = "AlamofireObjectMapperTests tvOS"
+               BlueprintIdentifier = "6AB2A01B1AF26C36001EBB20"
+               BuildableName = "AlamofireObjectMapperTests iOS.xctest"
+               BlueprintName = "AlamofireObjectMapperTests iOS"
                ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
             </BuildableReference>
          </TestableReference>

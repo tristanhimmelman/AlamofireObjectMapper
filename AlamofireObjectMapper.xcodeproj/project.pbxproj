@@ -20,6 +20,7 @@
 		6AC692231BE3F9AE004C119A /* AlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A02D1AF2746D001EBB20 /* AlamofireObjectMapper.swift */; };
 		6AC6924A1BE3FEA4004C119A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC692481BE3FEA4004C119A /* Alamofire.framework */; };
 		6AC6924B1BE3FEA4004C119A /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC692491BE3FEA4004C119A /* ObjectMapper.framework */; };
+		6AC6924C1BE7BC47004C119A /* AlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB2A02D1AF2746D001EBB20 /* AlamofireObjectMapper.swift */; };
 		6AC787651BA86CA3007BBD2B /* AlamofireObjectMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB2A0161AF26C36001EBB20 /* AlamofireObjectMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6AC787661BA871C4007BBD2B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A905E3A1B067CAC00884083 /* Alamofire.framework */; };
 		6AC787671BA871C4007BBD2B /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A905E3B1B067CAC00884083 /* ObjectMapper.framework */; };
@@ -516,6 +517,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AC6924C1BE7BC47004C119A /* AlamofireObjectMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -890,8 +892,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/build/Debug-appletvos",
-					"$(PROJECT_DIR)/Carthage/Checkouts/ObjectMapper/build/Debug-appletvos",
 				);
 				INFOPLIST_FILE = AlamofireObjectMapper/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -916,8 +916,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/build/Debug-appletvos",
-					"$(PROJECT_DIR)/Carthage/Checkouts/ObjectMapper/build/Debug-appletvos",
 				);
 				INFOPLIST_FILE = AlamofireObjectMapper/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

@@ -46,6 +46,19 @@ Alamofire.request(.GET, URL, parameters: nil)
                 }
             }
 }
+Alamofire.request(.GET, URL).responseObject("data") { (response: Response<WeatherResponse, NSError>) in
+            expectation.fulfill()
+            
+    let weatherResponse = response.result.value
+    
+    print(weatherResponse?.location)
+    if let threeDayForecast = weatherResponse?.threeDayForecast {
+        for forecast in threeDayForecast {
+            print(forecast.day)
+            print(forecast.temperature)           
+        }
+    }
+}
 ```
 
 The `WeatherResponse` object in the completion handler is a custom object which you define. The only requirement is that the object must conform to [ObjectMapper's](https://github.com/Hearst-DD/ObjectMapper/) `Mappable` protocol. In the above example, the `WeatherResponse` object looks like the following:
@@ -131,15 +144,18 @@ For example, if your endpoint returns the following:
 You can request and map it as follows:
 ```swift
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
-Alamofire.request(.GET, URL, parameters: nil)
-         .responseArray { (response: [Forecast]?, error: ErrorType?) in
-            if let response = response {
-                for forecast in response {
-                    print(forecast.day)
-                    print(forecast.temperature)           
-                }
-            }
+Alamofire.request(.GET, URL).responseArray { (response: Response<[Forecast], NSError>) in
+
+    let forecastArray = response.result.value
+    
+    if let forecastArray = forecastArray {
+        for forecast in forecastArray {
+            print(forecast.day)
+            print(forecast.temperature)           
+        }
+    }
 }
+
 ```
 
 #Installation
