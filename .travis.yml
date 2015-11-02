@@ -9,6 +9,7 @@ env:
   matrix:
     - SCHEME="AlamofireObjectMapper iOS" SDK="iphonesimulator"
     - SCHEME="AlamofireObjectMapper OSX" SDK="macosx"
+    - SCHEME="AlamofireObjectMapper tvOS" SDK="tvOS Simulator"    
 
 before_install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
