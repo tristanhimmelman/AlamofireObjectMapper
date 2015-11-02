@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6AC692051BE3F69E004C119A"
-               BuildableName = "AlamofireObjectMapper tvOS.framework"
+               BuildableName = "AlamofireObjectMapper.framework"
                BlueprintName = "AlamofireObjectMapper tvOS"
                ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6AC692051BE3F69E004C119A"
-            BuildableName = "AlamofireObjectMapper tvOS.framework"
+            BuildableName = "AlamofireObjectMapper.framework"
             BlueprintName = "AlamofireObjectMapper tvOS"
             ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6AC692051BE3F69E004C119A"
-            BuildableName = "AlamofireObjectMapper tvOS.framework"
+            BuildableName = "AlamofireObjectMapper.framework"
             BlueprintName = "AlamofireObjectMapper tvOS"
             ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6AC692051BE3F69E004C119A"
-            BuildableName = "AlamofireObjectMapper tvOS.framework"
+            BuildableName = "AlamofireObjectMapper.framework"
             BlueprintName = "AlamofireObjectMapper tvOS"
             ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
          </BuildableReference>
