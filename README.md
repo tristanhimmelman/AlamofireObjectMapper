@@ -39,8 +39,8 @@ let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMap
 Alamofire.request(.GET, URL).responseObject("data") { (response: Response<WeatherResponse, NSError>) in
 
     let weatherResponse = response.result.value
-    
     print(weatherResponse?.location)
+    
     if let threeDayForecast = weatherResponse?.threeDayForecast {
         for forecast in threeDayForecast {
             print(forecast.day)
@@ -84,32 +84,45 @@ class Forecast: Mappable {
 }
 ```
 
-The extension uses Generics to allow you to create your own custom response objects. Below are the three functions which you can use to have your responses mapped to objects. Just replace `T` with your custom response object and the extension handles the rest: 
-
+The extension uses Generics to allow you to create your own custom response objects. Below are four functions which you can use to have your responses mapped to objects. Just replace `T` with your custom response object and the extension handles the rest: 
 ```swift
-func responseObject<T: Mappable>(completionHandler: (T?, ErrorType?) -> Void) -> Self
+public func responseObject<T: Mappable>(completionHandler: Response<T, NSError> -> Void) -> Self
 ```
 
 ```swift
-func responseObject<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self
+public func responseObject<T: Mappable>(keyPath: String, completionHandler: Response<T, NSError> -> Void) -> Self
 ```
 
 ```swift
-func responseObject<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, T?, AnyObject?, ErrorType?) -> Void) -> Self
+    public func responseObject<T: Mappable>(queue: dispatch_queue_t?, completionHandler: Response<T, NSError> -> Void) -> Self
 ```
+
+```swift
+    public func responseObject<T: Mappable>(queue: dispatch_queue_t?, keyPath: String?, completionHandler: Response<T, NSError> -> Void) -> Self
+```
+
+###KeyPath
+
+The `keyPath` variable in the functions above is used to drill down in a JSON response and only map the data at that `keyPath`. It also supports nested values such as `data.weather` to drill down several levels in a JSON response.
+
 #Array Responses
 If you have an endpoint that returns data in `Array` form you can map it with the following functions:
 ```swift
-func responseArray<T: Mappable>(completionHandler: ([T]?, ErrorType?) -> Void) -> Self
+public func responseArray<T: Mappable>(completionHandler: Response<[T], NSError> -> Void) -> Self
 ```
 
 ```swift
-func responseArray<T: Mappable>(completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, ErrorType?) -> Void) -> Self
+public func responseArray<T: Mappable>(keyPath: String, completionHandler: Response<[T], NSError> -> Void) -> Self
 ```
 
 ```swift
-func responseArray<T: Mappable>(queue: dispatch_queue_t?, completionHandler: (NSURLRequest, NSHTTPURLResponse?, [T]?, AnyObject?, ErrorType?) -> Void) -> Self
+public func responseArray<T: Mappable>(queue: dispatch_queue_t?, completionHandler: Response<[T], NSError> -> Void) -> Self
 ```
+
+```swift
+public func responseArray<T: Mappable>(queue: dispatch_queue_t?, keyPath: String?, completionHandler: Response<[T], NSError> -> Void) -> Self
+```
+
 For example, if your endpoint returns the following:
 ```
 [
