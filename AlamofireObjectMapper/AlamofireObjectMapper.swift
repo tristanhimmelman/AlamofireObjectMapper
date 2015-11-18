@@ -48,7 +48,7 @@ extension Request {
             let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
         
             let JSONToMap: AnyObject?
-            if let keyPath = keyPath {
+            if let keyPath = keyPath where keyPath.isEmpty == false {
                 JSONToMap = result.value?.valueForKeyPath(keyPath)
             } else {
                 JSONToMap = result.value
@@ -128,7 +128,7 @@ extension Request {
             let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
             
             let JSONToMap: AnyObject?
-            if let keyPath = keyPath {
+            if let keyPath = keyPath where keyPath.isEmpty == false {
                 JSONToMap = result.value?.valueForKeyPath(keyPath)
             } else {
                 JSONToMap = result.value
