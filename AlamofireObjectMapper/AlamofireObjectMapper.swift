@@ -129,7 +129,7 @@ extension Request {
             
             let JSONToMap: AnyObject?
             if let keyPath = keyPath {
-                JSONToMap = result.value?[keyPath]
+                JSONToMap = result.value?.valueForKeyPath(keyPath)
             } else {
                 JSONToMap = result.value
             }
