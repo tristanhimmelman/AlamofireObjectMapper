@@ -94,11 +94,11 @@ public func responseObject<T: Mappable>(keyPath: String, completionHandler: Resp
 ```
 
 ```swift
-    public func responseObject<T: Mappable>(queue: dispatch_queue_t?, completionHandler: Response<T, NSError> -> Void) -> Self
+public func responseObject<T: Mappable>(queue: dispatch_queue_t?, completionHandler: Response<T, NSError> -> Void) -> Self
 ```
 
 ```swift
-    public func responseObject<T: Mappable>(queue: dispatch_queue_t?, keyPath: String?, completionHandler: Response<T, NSError> -> Void) -> Self
+public func responseObject<T: Mappable>(queue: dispatch_queue_t?, keyPath: String?, completionHandler: Response<T, NSError> -> Void) -> Self
 ```
 
 ###KeyPath
