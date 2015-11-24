@@ -83,7 +83,7 @@ extension Request {
      
      - returns: The request.
      */
-    public func responseObject<T: Mappable>(keyPath: String, completionHandler: Response<T, NSError> -> Void) -> Self {
+    public func responseObject<T: Mappable>(keyPath: String?, completionHandler: Response<T, NSError> -> Void) -> Self {
         return responseObject(nil, keyPath: keyPath, completionHandler: completionHandler)
     }
 
