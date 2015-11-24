@@ -96,6 +96,32 @@ class AlamofireObjectMapperTests: XCTestCase {
         }
     }
     
+    func testResponseObjectWithNestedKeyPath() {
+        // This is an example of a functional test case.
+        let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/97231a04e6e4970612efcc0b7e0c125a83e3de6e/sample_keypath_json"
+        let expectation = expectationWithDescription("\(URL)")
+        
+        Alamofire.request(.GET, URL).responseObject("response.data") { (response: Response<WeatherResponse, NSError>) in
+            expectation.fulfill()
+            
+            let mappedObject = response.result.value
+            
+            XCTAssertNotNil(mappedObject, "Response should not be nil")
+            XCTAssertNotNil(mappedObject?.location, "Location should not be nil")
+            XCTAssertNotNil(mappedObject?.threeDayForecast, "ThreeDayForcast should not be nil")
+            
+            for forecast in mappedObject!.threeDayForecast! {
+                XCTAssertNotNil(forecast.day, "day should not be nil")
+                XCTAssertNotNil(forecast.conditions, "conditions should not be nil")
+                XCTAssertNotNil(forecast.temperature, "temperature should not be nil")
+            }
+        }
+        
+        waitForExpectationsWithTimeout(10) { (error: NSError?) -> Void in
+            XCTAssertNil(error, "\(error)")
+        }
+    }
+    
     func testResponseArray() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
@@ -147,10 +173,10 @@ class AlamofireObjectMapperTests: XCTestCase {
     
     func testArrayResponseArrayWithNestedKeyPath() {
         // This is an example of a functional test case.
-        let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/8485b1c4afcae9b793c436553da59420ffad7e7f/sample_keypath_json"
+        let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/97231a04e6e4970612efcc0b7e0c125a83e3de6e/sample_keypath_json"
         let expectation = expectationWithDescription("\(URL)")
         
-        Alamofire.request(.GET, URL).responseArray("data.three_day_forecast") { (response: Response<[Forecast], NSError>) in
+        Alamofire.request(.GET, URL).responseArray("response.data.three_day_forecast") { (response: Response<[Forecast], NSError>) in
             
             expectation.fulfill()
             
