@@ -35,7 +35,7 @@ Given a URL which returns weather data in the following form:
 
 You can use this extension as the follows:
 ```swift
-let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
+let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/2ee8f34d21e8febfdefb2b3a403f18a43818d70a/sample_keypath_json"
 Alamofire.request(.GET, URL).responseObject("data") { (response: Response<WeatherResponse, NSError>) in
 
     let weatherResponse = response.result.value
