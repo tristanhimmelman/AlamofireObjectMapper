@@ -161,7 +161,7 @@ Alamofire.request(.GET, URL).responseArray { (response: Response<[Forecast], NSE
 ```
 
 #Installation
-AlamofireObjectMapper can be added to your project using [Cocoapods](https://cocoapods.org/) by adding the following line to your Podfile:
+AlamofireObjectMapper can be added to your project using [CocoaPods](https://cocoapods.org/) by adding the following line to your Podfile:
 ```
 pod 'AlamofireObjectMapper', '~> 2.1'
 ```
