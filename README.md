@@ -97,6 +97,24 @@ The `responseObject` function has 3 optional parameters and a required completio
 ###KeyPath
 
 The `keyPath` variable is used to drill down into a JSON response and only map the data found at that `keyPath`. It supports nested values such as `data.weather` to drill down several levels in a JSON response.
+```
+let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/2ee8f34d21e8febfdefb2b3a403f18a43818d70a/sample_keypath_json"
+let expectation = expectationWithDescription("\(URL)")
+
+Alamofire.request(.GET, URL).responseObject(keyPath: "data") { (response: Response<WeatherResponse, NSError>) in
+    expectation.fulfill()
+    
+    let weatherResponse = response.result.value
+    print(weatherResponse?.location)
+    
+    if let threeDayForecast = weatherResponse?.threeDayForecast {
+        for forecast in threeDayForecast {
+            print(forecast.day)
+            print(forecast.temperature)           
+        }
+    }
+}
+```
 
 #Array Responses
 If you have an endpoint that returns data in `Array` form you can map it with the following function:
