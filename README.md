@@ -94,9 +94,6 @@ The `responseObject` function has 3 optional parameters and a required completio
 - `mapToObject`: An object to perform the mapping on to
 - `completionHandler`: A closure to be executed once the request has finished and the data has been mapped by ObjectMapper.
 
-- returns: The request.
-*/
-
 ###KeyPath
 
 The `keyPath` variable is used to drill down into a JSON response and only map the data found at that `keyPath`. It supports nested values such as `data.weather` to drill down several levels in a JSON response.
