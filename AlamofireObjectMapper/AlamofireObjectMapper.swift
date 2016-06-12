@@ -30,6 +30,37 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
+/**
+ Creates a request using the specified method, URL string, object, and parameter encoding.
+ 
+ - parameter method:     The HTTP method.
+ - parameter URLString:  The URL string.
+ - parameter object:     The object to be marshalled.
+ - parameter encoding:   The parameter encoding. `.JSON` by default.
+ - parameter headers:    The HTTP headers. `nil` by default.
+ 
+ - returns: The created request.
+ */
+public func request<T: Mappable>(
+    method: Alamofire.Method,
+    _ URLString: URLStringConvertible,
+      object: T? = nil,
+      encoding: ParameterEncoding = .JSON,
+      headers: [String: String]? = nil)
+    -> Request
+{
+    let parameters:[String: AnyObject]? =
+        object != nil ? Mapper().toJSON(object!) : nil
+    
+    return Alamofire.request(
+        method,
+        URLString,
+        parameters: parameters,
+        encoding: encoding,
+        headers: headers
+    )
+}
+
 extension Request {
     
     public static func ObjectMapperSerializer<T: Mappable>(keyPath: String?, mapToObject object: T? = nil) -> ResponseSerializer<T, NSError> {

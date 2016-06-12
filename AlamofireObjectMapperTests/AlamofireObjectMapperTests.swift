@@ -225,6 +225,43 @@ class AlamofireObjectMapperTests: XCTestCase {
             XCTAssertNil(error, "\(error)")
         }
     }
+    
+    func testPOSTObject() {
+        let URL = "https://example.com/some_endpoint"
+        let inputForecast = Forecast(day: "Friday", temperature: 24, conditions: "Partly cloudy")
+        
+        let httpRequest = request(.POST, URL, object: inputForecast).request!
+        
+        let httpBodyString = NSString(data: httpRequest.HTTPBody!, encoding: NSUTF8StringEncoding)
+        XCTAssertNotNil(httpBodyString, "Request body should not be nil")
+        
+        let outputForecast = Mapper<Forecast>().map(httpBodyString!)!
+
+        XCTAssertEqual(URL, httpRequest.URL?.absoluteString)
+        XCTAssertEqual("application/json", httpRequest.valueForHTTPHeaderField("content-type"))
+        XCTAssertEqual(inputForecast.day, outputForecast.day)
+        XCTAssertEqual(inputForecast.conditions, outputForecast.conditions)
+        XCTAssertEqual(inputForecast.temperature, outputForecast.temperature)
+    }
+    
+    func testPUTObject() {
+        let URL = "https://example.com/some_endpoint"
+        let inputForecast = Forecast(day: "Friday", temperature: 24, conditions: "Partly cloudy")
+        
+        let httpRequest = request(.PUT, URL, object: inputForecast).request!
+        
+        let httpBodyString = NSString(data: httpRequest.HTTPBody!, encoding: NSUTF8StringEncoding)!
+        XCTAssertNotNil(httpBodyString, "Request body should not be nil")
+
+        let outputForecast = Mapper<Forecast>().map(httpBodyString)!
+
+        XCTAssertEqual(URL, httpRequest.URL?.absoluteString)
+        XCTAssertEqual("application/json", httpRequest.valueForHTTPHeaderField("content-type"))
+        XCTAssertEqual(inputForecast.day, outputForecast.day)
+        XCTAssertEqual(inputForecast.conditions, outputForecast.conditions)
+        XCTAssertEqual(inputForecast.temperature, outputForecast.temperature)
+    }
+    
 }
 
 class WeatherResponse: Mappable {
@@ -252,6 +289,12 @@ class Forecast: Mappable {
 	required init?(_ map: Map){
 
 	}
+    
+    init(day: String?, temperature: Int?, conditions: String?) {
+        self.day = day
+        self.temperature = temperature
+        self.conditions = conditions
+    }
 	
 	func mapping(map: Map) { 
 		day <- map["day"]
