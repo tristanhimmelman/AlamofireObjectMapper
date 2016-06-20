@@ -32,7 +32,7 @@ import ObjectMapper
 
 extension Request {
     
-    public static func ObjectMapperSerializer<T: Mappable>(keyPath: String?, mapToObject object: T? = nil) -> ResponseSerializer<T, NSError> {
+    public static func ObjectMapperSerializer<T: Mappable>(keyPath: String?, mapToObject object: T? = nil, context: MapContext? = nil) -> ResponseSerializer<T, NSError> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else {
                 return .Failure(error!)
@@ -57,7 +57,7 @@ extension Request {
             if let object = object {
                 Mapper<T>().map(JSONToMap, toObject: object)
                 return .Success(object)
-            } else if let parsedObject = Mapper<T>().map(JSONToMap){
+            } else if let parsedObject = Mapper<T>(context).map(JSONToMap){
                 return .Success(parsedObject)
             }
 
@@ -78,11 +78,11 @@ extension Request {
      - returns: The request.
      */
     
-    public func responseObject<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, mapToObject object: T? = nil, completionHandler: Response<T, NSError> -> Void) -> Self {
-        return response(queue: queue, responseSerializer: Request.ObjectMapperSerializer(keyPath, mapToObject: object), completionHandler: completionHandler)
+    public func responseObject<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: Response<T, NSError> -> Void) -> Self {
+        return response(queue: queue, responseSerializer: Request.ObjectMapperSerializer(keyPath, mapToObject: object, context: context), completionHandler: completionHandler)
     }
     
-    public static func ObjectMapperArraySerializer<T: Mappable>(keyPath: String?) -> ResponseSerializer<[T], NSError> {
+    public static func ObjectMapperArraySerializer<T: Mappable>(keyPath: String?, context: MapContext? = nil) -> ResponseSerializer<[T], NSError> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else {
                 return .Failure(error!)
@@ -104,7 +104,7 @@ extension Request {
                 JSONToMap = result.value
             }
             
-            if let parsedObject = Mapper<T>().mapArray(JSONToMap){
+            if let parsedObject = Mapper<T>(context).mapArray(JSONToMap){
                 return .Success(parsedObject)
             }
             
@@ -123,7 +123,7 @@ extension Request {
      
      - returns: The request.
     */
-    public func responseArray<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, completionHandler: Response<[T], NSError> -> Void) -> Self {
-        return response(queue: queue, responseSerializer: Request.ObjectMapperArraySerializer(keyPath), completionHandler: completionHandler)
+    public func responseArray<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: Response<[T], NSError> -> Void) -> Self {
+        return response(queue: queue, responseSerializer: Request.ObjectMapperArraySerializer(keyPath, context), completionHandler: completionHandler)
     }
 }
