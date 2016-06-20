@@ -57,7 +57,7 @@ extension Request {
             if let object = object {
                 Mapper<T>().map(JSONToMap, toObject: object)
                 return .Success(object)
-            } else if let parsedObject = Mapper<T>(context).map(JSONToMap){
+            } else if let parsedObject = Mapper<T>(context: context).map(JSONToMap){
                 return .Success(parsedObject)
             }
 
@@ -104,7 +104,7 @@ extension Request {
                 JSONToMap = result.value
             }
             
-            if let parsedObject = Mapper<T>(context).mapArray(JSONToMap){
+            if let parsedObject = Mapper<T>(context: context).mapArray(JSONToMap){
                 return .Success(parsedObject)
             }
             
@@ -124,6 +124,6 @@ extension Request {
      - returns: The request.
     */
     public func responseArray<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: Response<[T], NSError> -> Void) -> Self {
-        return response(queue: queue, responseSerializer: Request.ObjectMapperArraySerializer(keyPath, context), completionHandler: completionHandler)
+        return response(queue: queue, responseSerializer: Request.ObjectMapperArraySerializer(keyPath, context: context), completionHandler: completionHandler)
     }
 }
