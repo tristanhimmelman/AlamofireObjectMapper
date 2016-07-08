@@ -32,6 +32,15 @@ import ObjectMapper
 
 extension Request {
     
+    internal static func newError(code: Error.Code, failureReason: String) -> NSError {
+        let errorDomain = "com.alamofireobjectmapper.error"
+        
+        let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+        let returnError = NSError(domain: errorDomain, code: code.rawValue, userInfo: userInfo)
+        
+        return returnError
+    }
+    
     public static func ObjectMapperSerializer<T: Mappable>(keyPath: String?, mapToObject object: T? = nil, context: MapContext? = nil) -> ResponseSerializer<T, NSError> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else {
@@ -40,7 +49,7 @@ extension Request {
             
             guard let _ = data else {
                 let failureReason = "Data could not be serialized. Input data was nil."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = newError(.DataSerializationFailed, failureReason: failureReason)
                 return .Failure(error)
             }
             
@@ -62,7 +71,7 @@ extension Request {
             }
 
             let failureReason = "ObjectMapper failed to serialize response."
-            let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+            let error = newError(.DataSerializationFailed, failureReason: failureReason)
             return .Failure(error)
         }
     }
@@ -90,7 +99,7 @@ extension Request {
             
             guard let _ = data else {
                 let failureReason = "Data could not be serialized. Input data was nil."
-                let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+                let error = newError(.DataSerializationFailed, failureReason: failureReason)
                 return .Failure(error)
             }
             
@@ -109,7 +118,7 @@ extension Request {
             }
             
             let failureReason = "ObjectMapper failed to serialize response."
-            let error = Error.errorWithCode(.DataSerializationFailed, failureReason: failureReason)
+            let error = newError(.DataSerializationFailed, failureReason: failureReason)
             return .Failure(error)
         }
     }
