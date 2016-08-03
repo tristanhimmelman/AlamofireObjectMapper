@@ -65,7 +65,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { (error: Error?) -> Void in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -95,7 +95,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { (error: Error?) -> Void in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -121,7 +121,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { (error: Error?) -> Void in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -147,7 +147,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { (error: Error?) -> Void in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -171,7 +171,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
 
-        waitForExpectations(timeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { (error: Error?) -> Void in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -196,7 +196,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { (error: Error?) -> Void in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -221,7 +221,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { (error: Error?) -> Void in
             XCTAssertNil(error, "\(error)")
         }
     }

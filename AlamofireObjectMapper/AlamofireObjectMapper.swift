@@ -32,7 +32,7 @@ import ObjectMapper
 
 extension Request {
     
-    internal static func newError(_ code: Error.Code, failureReason: String) -> NSError {
+    internal static func newError(_ code: ErrorCode, failureReason: String) -> NSError {
         let errorDomain = "com.alamofireobjectmapper.error"
         
         let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
