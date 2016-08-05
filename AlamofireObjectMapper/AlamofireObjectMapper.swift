@@ -57,14 +57,14 @@ extension Request {
             let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
         
             let JSONToMap: AnyObject?
-            if let keyPath = keyPath where keyPath.isEmpty == false {
+            if let keyPath = keyPath , keyPath.isEmpty == false {
                 JSONToMap = result.value?.value(forKeyPath: keyPath)
             } else {
                 JSONToMap = result.value
             }
             
             if let object = object {
-                Mapper<T>().map(JSONToMap, toObject: object)
+                _ = Mapper<T>().map(JSONToMap, toObject: object)
                 return .success(object)
             } else if let parsedObject = Mapper<T>(context: context).map(JSONToMap){
                 return .success(parsedObject)
@@ -107,7 +107,7 @@ extension Request {
             let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
             
             let JSONToMap: AnyObject?
-            if let keyPath = keyPath where keyPath.isEmpty == false {
+            if let keyPath = keyPath, keyPath.isEmpty == false {
                 JSONToMap = result.value?.value(forKeyPath: keyPath)
             } else {
                 JSONToMap = result.value

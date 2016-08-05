@@ -47,7 +47,7 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testResponseObject() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
-        let expectation = self.expectation(withDescription: "\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
         
         _ = Alamofire.request(.GET, URL).responseObject { (response: Response<WeatherResponse, NSError>) in
             expectation.fulfill()
@@ -65,7 +65,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(withTimeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -73,7 +73,7 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testResponseObjectMapToObject() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
-        let expectation = self.expectation(withDescription: "\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
         
         let weatherResponse = WeatherResponse()
         weatherResponse.date = Date()
@@ -95,7 +95,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(withTimeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -103,7 +103,7 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testResponseObjectWithKeyPath() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/2ee8f34d21e8febfdefb2b3a403f18a43818d70a/sample_keypath_json"
-        let expectation = self.expectation(withDescription: "\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
         
         _ = Alamofire.request(.GET, URL).responseObject(keyPath: "data") { (response: Response<WeatherResponse, NSError>) in
             expectation.fulfill()
@@ -121,7 +121,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(withTimeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -129,7 +129,7 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testResponseObjectWithNestedKeyPath() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/97231a04e6e4970612efcc0b7e0c125a83e3de6e/sample_keypath_json"
-        let expectation = self.expectation(withDescription: "\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
         
         _ = Alamofire.request(.GET, URL).responseObject(keyPath: "response.data") { (response: Response<WeatherResponse, NSError>) in
             expectation.fulfill()
@@ -147,7 +147,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(withTimeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -155,7 +155,7 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testResponseArray() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
-        let expectation = self.expectation(withDescription: "\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
 
         _ = Alamofire.request(.GET, URL).responseArray { (response: Response<[Forecast], NSError>) in
             expectation.fulfill()
@@ -171,7 +171,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
 
-        waitForExpectations(withTimeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -179,7 +179,7 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testArrayResponseArrayWithKeyPath() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
-        let expectation = self.expectation(withDescription: "\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
         
         _ = Alamofire.request(.GET, URL).responseArray(keyPath: "three_day_forecast") { (response: Response<[Forecast], NSError>) in
         
@@ -196,7 +196,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(withTimeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -204,7 +204,7 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testArrayResponseArrayWithNestedKeyPath() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/97231a04e6e4970612efcc0b7e0c125a83e3de6e/sample_keypath_json"
-        let expectation = self.expectation(withDescription: "\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
         
         _ = Alamofire.request(.GET, URL).responseArray(keyPath: "response.data.three_day_forecast") { (response: Response<[Forecast], NSError>) in
             
@@ -221,7 +221,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectations(withTimeout: 10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
