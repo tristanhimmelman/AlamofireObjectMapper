@@ -87,7 +87,7 @@ extension Request {
      - returns: The request.
      */
     
-    public func responseObject<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: (Response<T, NSError>) -> Void) -> Self {
+    public func responseObject<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: @escaping (Response<T, NSError>) -> Void) -> Self {
         return response(queue: queue, responseSerializer: Request.ObjectMapperSerializer(keyPath, mapToObject: object, context: context), completionHandler: completionHandler)
     }
     
@@ -132,7 +132,7 @@ extension Request {
      
      - returns: The request.
     */
-    public func responseArray<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: (Response<[T], NSError>) -> Void) -> Self {
+    public func responseArray<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: @escaping (Response<[T], NSError>) -> Void) -> Self {
         return response(queue: queue, responseSerializer: Request.ObjectMapperArraySerializer(keyPath, context: context), completionHandler: completionHandler)
     }
 }
