@@ -56,9 +56,9 @@ extension Request {
             let JSONResponseSerializer = Request.JSONResponseSerializer(options: .allowFragments)
             let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
         
-            let JSONToMap: AnyObject?
+            let JSONToMap: Any?
             if let keyPath = keyPath , keyPath.isEmpty == false {
-                JSONToMap = result.value?.value(forKeyPath: keyPath)
+                JSONToMap = (result.value as AnyObject?)?.value(forKeyPath: keyPath)
             } else {
                 JSONToMap = result.value
             }
@@ -87,7 +87,7 @@ extension Request {
      - returns: The request.
      */
     
-    public func responseObject<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: (Response<T, NSError>) -> Void) -> Self {
+    public func responseObject<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: @escaping (Response<T, NSError>) -> Void) -> Self {
         return response(queue: queue, responseSerializer: Request.ObjectMapperSerializer(keyPath, mapToObject: object, context: context), completionHandler: completionHandler)
     }
     
@@ -106,9 +106,9 @@ extension Request {
             let JSONResponseSerializer = Request.JSONResponseSerializer(options: .allowFragments)
             let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
             
-            let JSONToMap: AnyObject?
+            let JSONToMap: Any?
             if let keyPath = keyPath, keyPath.isEmpty == false {
-                JSONToMap = result.value?.value(forKeyPath: keyPath)
+                JSONToMap = (result.value as AnyObject?)?.value(forKeyPath: keyPath)
             } else {
                 JSONToMap = result.value
             }
@@ -132,7 +132,7 @@ extension Request {
      
      - returns: The request.
     */
-    public func responseArray<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: (Response<[T], NSError>) -> Void) -> Self {
+    public func responseArray<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: @escaping (Response<[T], NSError>) -> Void) -> Self {
         return response(queue: queue, responseSerializer: Request.ObjectMapperArraySerializer(keyPath, context: context), completionHandler: completionHandler)
     }
 }
