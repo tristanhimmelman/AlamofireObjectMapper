@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C7BE09AD-45C0-4DDF-AC80-A6D8717D2DCE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AlamofireObjectMapper</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D712610954CA9BFA7A6E793AC8CA9FD9B6557F56</key>
+		<string>https://github.com/tristanhimmelman/Alamofire-ObjectMapper.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AlamofireObjectMapper.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D712610954CA9BFA7A6E793AC8CA9FD9B6557F56</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/tristanhimmelman/Alamofire-ObjectMapper.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D712610954CA9BFA7A6E793AC8CA9FD9B6557F56</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D712610954CA9BFA7A6E793AC8CA9FD9B6557F56</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AlamofireObjectMapper</string>
+		</dict>
+	</array>
+</dict>
+</plist>

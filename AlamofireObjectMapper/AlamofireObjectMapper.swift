@@ -32,6 +32,11 @@ import ObjectMapper
 
 extension Request {
     
+    enum ErrorCode: Int {
+        case noData = 1
+        case dataSerializationFailed = 2
+    }
+    
     internal static func newError(_ code: ErrorCode, failureReason: String) -> NSError {
         let errorDomain = "com.alamofireobjectmapper.error"
         
@@ -41,7 +46,7 @@ extension Request {
         return returnError
     }
     
-    public static func ObjectMapperSerializer<T: Mappable>(_ keyPath: String?, mapToObject object: T? = nil, context: MapContext? = nil) -> ResponseSerializer<T, NSError> {
+    public static func ObjectMapperSerializer<T: Mappable>(_ keyPath: String?, mapToObject object: T? = nil, context: MapContext? = nil) -> ResponseSerializer<T> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else {
                 return .failure(error!)
@@ -49,7 +54,7 @@ extension Request {
             
             guard let _ = data else {
                 let failureReason = "Data could not be serialized. Input data was nil."
-                let error = newError(.dataSerializationFailed, failureReason: failureReason)
+                let error = newError(.noData, failureReason: failureReason)
                 return .failure(error)
             }
             
@@ -87,11 +92,11 @@ extension Request {
      - returns: The request.
      */
     
-    public func responseObject<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: @escaping (Response<T, NSError>) -> Void) -> Self {
+    public func responseObject<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: @escaping (Response<T>) -> Void) -> Self {
         return response(queue: queue, responseSerializer: Request.ObjectMapperSerializer(keyPath, mapToObject: object, context: context), completionHandler: completionHandler)
     }
     
-    public static func ObjectMapperArraySerializer<T: Mappable>(_ keyPath: String?, context: MapContext? = nil) -> ResponseSerializer<[T], NSError> {
+    public static func ObjectMapperArraySerializer<T: Mappable>(_ keyPath: String?, context: MapContext? = nil) -> ResponseSerializer<[T]> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else {
                 return .failure(error!)
@@ -132,7 +137,7 @@ extension Request {
      
      - returns: The request.
     */
-    public func responseArray<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: @escaping (Response<[T], NSError>) -> Void) -> Self {
+    public func responseArray<T: Mappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: @escaping (Response<[T]>) -> Void) -> Self {
         return response(queue: queue, responseSerializer: Request.ObjectMapperArraySerializer(keyPath, context: context), completionHandler: completionHandler)
     }
 }
