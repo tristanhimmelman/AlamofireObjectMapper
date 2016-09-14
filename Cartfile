@@ -1,2 +1,2 @@
 github "Alamofire/Alamofire" ~> 4.0 
-github "Hearst-DD/ObjectMapper" "swift-3" 
+github "Hearst-DD/ObjectMapper" ~> 2.0
