@@ -36,7 +36,7 @@ Given a URL which returns weather data in the following form:
 You can use the extension as the follows:
 ```swift
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
-Alamofire.request(.GET, URL).responseObject { (response: Response<WeatherResponse, NSError>) in
+Alamofire.request(.GET, URL).responseObject { (response: DataResponse<WeatherResponse>) in
 
     let weatherResponse = response.result.value
     print(weatherResponse?.location)
@@ -57,7 +57,7 @@ class WeatherResponse: Mappable {
     var location: String?
     var threeDayForecast: [Forecast]?
     
-	required init?(_ map: Map){
+	required init?(map: Map){
 
 	}
     
@@ -72,7 +72,7 @@ class Forecast: Mappable {
     var temperature: Int?
     var conditions: String?
     
-	required init?(_ map: Map){
+	required init?(map: Map){
 
 	}
     
@@ -86,7 +86,7 @@ class Forecast: Mappable {
 
 The extension uses Generics to allow you to create your own custom response objects. Below is the `responseObject` function definition. Just replace `T` in the completionHandler with your custom response object and the extension handles the rest: 
 ```swift
-public func responseObject<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, mapToObject object: T? = nil, completionHandler: Response<T, NSError> -> Void) -> Self
+public func responseObject<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, mapToObject object: T? = nil, completionHandler: DataResponse<T> -> Void) -> Self
 ```
 The `responseObject` function has 3 optional parameters and a required completionHandler:
 - `queue`: The queue on which the completion handler is dispatched.
@@ -101,7 +101,7 @@ The `keyPath` variable is used to drill down into a JSON response and only map t
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/2ee8f34d21e8febfdefb2b3a403f18a43818d70a/sample_keypath_json"
 let expectation = expectationWithDescription("\(URL)")
 
-Alamofire.request(.GET, URL).responseObject(keyPath: "data") { (response: Response<WeatherResponse, NSError>) in
+Alamofire.request(.GET, URL).responseObject(keyPath: "data") { (response: DataResponse<WeatherResponse>) in
     expectation.fulfill()
     
     let weatherResponse = response.result.value
@@ -119,7 +119,7 @@ Alamofire.request(.GET, URL).responseObject(keyPath: "data") { (response: Respon
 #Array Responses
 If you have an endpoint that returns data in `Array` form you can map it with the following function:
 ```swift
-public func responseArray<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, completionHandler: Response<[T], NSError> -> Void) -> Self
+public func responseArray<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, completionHandler: DataResponse<[T]> -> Void) -> Self
 ```
 
 For example, if your endpoint returns the following:
@@ -145,7 +145,7 @@ For example, if your endpoint returns the following:
 You can request and map it as follows:
 ```swift
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
-Alamofire.request(.GET, URL).responseArray { (response: Response<[Forecast], NSError>) in
+Alamofire.request(.GET, URL).responseArray { (response: DataResponse<[Forecast]>) in
 
     let forecastArray = response.result.value
     
