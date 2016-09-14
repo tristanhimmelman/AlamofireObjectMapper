@@ -60,7 +60,7 @@ extension DataRequest {
             
             let jsonResponseSerializer = DataRequest.jsonResponseSerializer(options: .allowFragments)
             let result = jsonResponseSerializer.serializeResponse(request, response, data, error)
-        
+            
             let JSONToMap: Any?
             if let keyPath = keyPath , keyPath.isEmpty == false {
                 JSONToMap = (result.value as AnyObject?)?.value(forKeyPath: keyPath)
@@ -69,18 +69,18 @@ extension DataRequest {
             }
             
             if let object = object {
-                _ = Mapper<T>().map(JSONToMap, toObject: object)
+                _ = Mapper<T>().map(JSONObject: JSONToMap, toObject: object)
                 return .success(object)
-            } else if let parsedObject = Mapper<T>(context: context).map(JSONToMap){
+            } else if let parsedObject = Mapper<T>(context: context).map(JSONObject: JSONToMap){
                 return .success(parsedObject)
             }
-
+            
             let failureReason = "ObjectMapper failed to serialize response."
             let error = newError(.dataSerializationFailed, failureReason: failureReason)
             return .failure(error)
         }
     }
-
+    
     /**
      Adds a handler to be called once the request has finished.
      
@@ -118,7 +118,7 @@ extension DataRequest {
                 JSONToMap = result.value
             }
             
-            if let parsedObject = Mapper<T>(context: context).mapArray(JSONToMap){
+            if let parsedObject = Mapper<T>(context: context).mapArray(JSONObject: JSONToMap){
                 return .success(parsedObject)
             }
             
@@ -136,7 +136,7 @@ extension DataRequest {
      - parameter completionHandler: A closure to be executed once the request has finished and the data has been mapped by ObjectMapper.
      
      - returns: The request.
-    */
+     */
     @discardableResult
     public func responseArray<T: BaseMappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: @escaping (DataResponse<[T]>) -> Void) -> Self {
         return response(queue: queue, responseSerializer: DataRequest.ObjectMapperArraySerializer(keyPath, context: context), completionHandler: completionHandler)
