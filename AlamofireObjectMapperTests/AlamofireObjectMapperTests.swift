@@ -47,9 +47,9 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testResponseObject() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
-        let expectation = expectationWithDescription("\(URL)")
-        
-        Alamofire.request(.GET, URL).responseObject { (response: Response<WeatherResponse, NSError>) in
+        let expectation = self.expectation(description: "\(URL)")
+
+        _ = Alamofire.request(URL, method: .get).responseObject { (response: DataResponse<WeatherResponse>) in
             expectation.fulfill()
             
             let mappedObject = response.result.value
@@ -65,7 +65,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectationsWithTimeout(10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -73,12 +73,12 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testResponseObjectMapToObject() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
-        let expectation = expectationWithDescription("\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
         
         let weatherResponse = WeatherResponse()
-        weatherResponse.date = NSDate()
+        weatherResponse.date = Date()
         
-        Alamofire.request(.GET, URL).responseObject(mapToObject: weatherResponse) { (response: Response<WeatherResponse, NSError>) in
+        _ = Alamofire.request(URL, method: .get).responseObject(mapToObject: weatherResponse) { (response: DataResponse<WeatherResponse>) in
             expectation.fulfill()
             
             let mappedObject = response.result.value
@@ -95,7 +95,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectationsWithTimeout(10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -103,9 +103,9 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testResponseObjectWithKeyPath() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/2ee8f34d21e8febfdefb2b3a403f18a43818d70a/sample_keypath_json"
-        let expectation = expectationWithDescription("\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
         
-        Alamofire.request(.GET, URL).responseObject(keyPath: "data") { (response: Response<WeatherResponse, NSError>) in
+        _ = Alamofire.request(URL, method: .get).responseObject(keyPath: "data") { (response: DataResponse<WeatherResponse>) in
             expectation.fulfill()
             
             let mappedObject = response.result.value
@@ -121,7 +121,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectationsWithTimeout(10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -129,9 +129,9 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testResponseObjectWithNestedKeyPath() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/97231a04e6e4970612efcc0b7e0c125a83e3de6e/sample_keypath_json"
-        let expectation = expectationWithDescription("\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
         
-        Alamofire.request(.GET, URL).responseObject(keyPath: "response.data") { (response: Response<WeatherResponse, NSError>) in
+        _ = Alamofire.request(URL, method: .get).responseObject(keyPath: "response.data") { (response: DataResponse<WeatherResponse>) in
             expectation.fulfill()
             
             let mappedObject = response.result.value
@@ -147,7 +147,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectationsWithTimeout(10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -155,9 +155,9 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testResponseArray() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
-        let expectation = expectationWithDescription("\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
 
-        Alamofire.request(.GET, URL).responseArray { (response: Response<[Forecast], NSError>) in
+        _ = Alamofire.request(URL, method: .get).responseArray { (response: DataResponse<[Forecast]>) in
             expectation.fulfill()
             
             let mappedArray = response.result.value
@@ -171,7 +171,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
 
-        waitForExpectationsWithTimeout(10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -179,9 +179,9 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testArrayResponseArrayWithKeyPath() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
-        let expectation = expectationWithDescription("\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
         
-        Alamofire.request(.GET, URL).responseArray(keyPath: "three_day_forecast") { (response: Response<[Forecast], NSError>) in
+        _ = Alamofire.request(URL, method: .get).responseArray(keyPath: "three_day_forecast") { (response: DataResponse<[Forecast]>) in
         
             expectation.fulfill()
             
@@ -196,7 +196,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectationsWithTimeout(10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -204,9 +204,9 @@ class AlamofireObjectMapperTests: XCTestCase {
     func testArrayResponseArrayWithNestedKeyPath() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/97231a04e6e4970612efcc0b7e0c125a83e3de6e/sample_keypath_json"
-        let expectation = expectationWithDescription("\(URL)")
+        let expectation = self.expectation(description: "\(URL)")
         
-        Alamofire.request(.GET, URL).responseArray(keyPath: "response.data.three_day_forecast") { (response: Response<[Forecast], NSError>) in
+        _ = Alamofire.request(URL, method: .get).responseArray(keyPath: "response.data.three_day_forecast") { (response: DataResponse<[Forecast]>) in
             
             expectation.fulfill()
             
@@ -221,7 +221,7 @@ class AlamofireObjectMapperTests: XCTestCase {
             }
         }
         
-        waitForExpectationsWithTimeout(10) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "\(error)")
         }
     }
@@ -230,11 +230,11 @@ class AlamofireObjectMapperTests: XCTestCase {
 class WeatherResponse: Mappable {
 	var location: String?
 	var threeDayForecast: [Forecast]?
-    var date: NSDate?
+    var date: Date?
 	
     init(){}
     
-	required init?(_ map: Map){
+	required init?(map: Map){
 
 	}
 	
@@ -249,7 +249,7 @@ class Forecast: Mappable {
 	var temperature: Int?
 	var conditions: String?
 	
-	required init?(_ map: Map){
+	required init?(map: Map){
 
 	}
 	
