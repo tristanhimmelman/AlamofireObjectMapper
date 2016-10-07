@@ -22,7 +22,7 @@ extension ClassFormatter {
         let allSubstructures: [(key: String, value: [String : AnyObject])] = includeSubstructures ? findSubstructures(withRootKey: className, inJson: rootJson) : [ (className, rootJson) ]
         
         for substructure in allSubstructures {
-            out += formatJsonAsMappableObjectClass(substructure.key, forJson: substructure.value)
+            out += formatJsonAsMappableObjectClass(named: substructure.key, forJson: substructure.value)
             out += "\n\n"
         }
         
@@ -38,8 +38,8 @@ extension ClassFormatter {
      
      - returns: The formatted class file as a String.
      */
-    public static func formatJsonAsMappableObjectClass(className: String, forJson json: [String : AnyObject]) -> String {
-        let longestKey = longestKeyLengthInJson(json)
+    public static func formatJsonAsMappableObjectClass(named className: String, forJson json: [String : AnyObject]) -> String {
+        let longestKey = longestKeyLength(inJson: json)
         let formattedJson = sortedVariables(forJson: json)
         
         var out: String = "\n\n" // Add space to begin relevant logging on a new line
@@ -53,7 +53,7 @@ extension ClassFormatter {
         
         out += "\n\n"
         out += "// MARK: - Init\n\n".indent(1)
-        out += "required init?(_ map: Map) { }\n\n\n".indent(1) // end init
+        out += "required init?(map: Map) { }\n\n\n".indent(1) // end init
         
         out += "// MARK: - Mappable\n\n".indent(1)
         out += "func mapping(map: Map) {\n".indent(1)
@@ -69,14 +69,14 @@ extension ClassFormatter {
         return out
     }
     
-    public static func sortedVariables(forJson json: [String : AnyObject]) -> [(String, AnyObject)] {
-        var formattedJson: [(String, AnyObject)]
+    public static func sortedVariables(forJson json: [String : AnyObject]) -> [(key: String, value: AnyObject)] {
+        var formattedJson: [(key: String, value: AnyObject)]
         
         if let sort = sort {
-            formattedJson = json.sort(sort)
+            formattedJson = json.sorted(by: sort)
         } else {
-            formattedJson = json.filter({ _ in
-                return true // Use filter to return [(String, AnyObject)] with all values
+            formattedJson = json.map({ (pair: (key: String, value: AnyObject)) -> (key: String, value: AnyObject) in
+                return (key: pair.key, value: pair.value)
             })
         }
         
@@ -93,7 +93,7 @@ extension ClassFormatter {
                 
                 if pair.value is [String : AnyObject] {
                     return (formattedKey, pair.value as! [String : AnyObject])
-                } else if let jsonArray = pair.value as? [[String : AnyObject]] where jsonArray.count > 0 {
+                } else if let jsonArray = pair.value as? [[String : AnyObject]], jsonArray.count > 0 {
                     return (formattedKey, jsonArray[0])
                 } else {
                     return (formattedKey, [:])
@@ -101,7 +101,7 @@ extension ClassFormatter {
         }
         
         for structure in substructures {
-            structures.appendContentsOf(findSubstructures(withRootKey: structure.key, inJson: structure.value))
+            structures.append(contentsOf: findSubstructures(withRootKey: structure.key, inJson: structure.value))
         }
         
         return structures
@@ -114,7 +114,7 @@ extension ClassFormatter {
      
      - returns: A String consisting of the specified number of spaces
      */
-    static func spaces(numSpaces: Int) -> String {
+    static func spaces(_ numSpaces: Int) -> String {
         
         var spaces = ""
         
@@ -132,7 +132,7 @@ extension ClassFormatter {
      
      - returns: The length of the longest key in the JSON after formatting as a variable name.
      */
-    static func longestKeyLengthInJson(json: [String : AnyObject]) -> Int {
+    static func longestKeyLength(inJson json: [String : AnyObject]) -> Int {
         var longestCount = 0
         
         for (key, _) in json {
@@ -147,6 +147,53 @@ extension ClassFormatter {
     }
 }
 
+public class BaseFormatter: ClassFormatter {
+    
+    public static let sort: (((key: String, value: AnyObject), (key: String, value: AnyObject)) -> Bool)? = nil
+    
+    public static func variableName(forKey key: String) -> String {
+        return key
+    }
+    
+    public static func classNameForSubstructure(withKey key: String) -> String {
+        return key.capitalized
+    }
+    
+    public static func typeString(forKey key: String, andValue value: AnyObject) -> String {
+        switch value {
+        case is String:
+            return "String"
+            
+        case is Int:
+            return "Int"
+            
+        case is Bool:
+            return "Bool"
+            
+        case is Double:
+            return "Double"
+            
+        case is [String : AnyObject]:
+            return classNameForSubstructure(withKey: key)
+            
+        case is [[String : AnyObject]]:
+            return "[\(classNameForSubstructure(withKey: key))]"
+            
+        case is [AnyObject]:
+            return "[AnyObject]"
+            
+        case is [[AnyObject]]:
+            return "[[AnyObject]]"
+            
+        case is NSDate:
+            return "NSDate"
+            
+        default:
+            return "AnyObject"
+        }
+    }
+}
+
 extension String {
     
     /**
@@ -156,7 +203,7 @@ extension String {
      
      - returns: A String with the specified number of tabs appended to the beginning of the String.
      */
-    func indent(size: Int) -> String {
+    internal func indent(_ size: Int) -> String {
         var out: String = ""
         
         for _ in 0 ... size {
