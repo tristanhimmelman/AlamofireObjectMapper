@@ -97,7 +97,7 @@ The `responseObject` function has 3 optional parameters and a required completio
 ###KeyPath
 
 The `keyPath` variable is used to drill down into a JSON response and only map the data found at that `keyPath`. It supports nested values such as `data.weather` to drill down several levels in a JSON response.
-```
+```swift
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/2ee8f34d21e8febfdefb2b3a403f18a43818d70a/sample_keypath_json"
 let expectation = expectationWithDescription("\(URL)")
 
