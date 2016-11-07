@@ -36,7 +36,7 @@ Given a URL which returns weather data in the following form:
 You can use the extension as the follows:
 ```swift
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
-Alamofire.request(.GET, URL).responseObject { (response: DataResponse<WeatherResponse>) in
+Alamofire.request(URL).responseObject { (response: DataResponse<WeatherResponse>) in
 
     let weatherResponse = response.result.value
     print(weatherResponse?.location)
@@ -101,7 +101,7 @@ The `keyPath` variable is used to drill down into a JSON response and only map t
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/2ee8f34d21e8febfdefb2b3a403f18a43818d70a/sample_keypath_json"
 let expectation = expectationWithDescription("\(URL)")
 
-Alamofire.request(.GET, URL).responseObject(keyPath: "data") { (response: DataResponse<WeatherResponse>) in
+Alamofire.request(URL).responseObject(keyPath: "data") { (response: DataResponse<WeatherResponse>) in
     expectation.fulfill()
     
     let weatherResponse = response.result.value
@@ -145,7 +145,7 @@ For example, if your endpoint returns the following:
 You can request and map it as follows:
 ```swift
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
-Alamofire.request(.GET, URL).responseArray { (response: DataResponse<[Forecast]>) in
+Alamofire.request(URL).responseArray { (response: DataResponse<[Forecast]>) in
 
     let forecastArray = response.result.value
     
