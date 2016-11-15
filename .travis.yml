@@ -14,6 +14,9 @@ env:
 before_install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 
+before_script:
+  - carthage bootstrap --no-build
+
 script:
   - set -o pipefail
   - xcodebuild -workspace "$XCODE_WORKSPACE" -scheme "$SCHEME" -configuration Debug clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -c;
