@@ -71,6 +71,17 @@ extension DataRequest {
             if let object = object {
                 _ = Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONToMap, toObject: object)
                 return .success(object)
+                
+            } else if let immuT = T.self as? ImmutableMappable.Type {
+                
+                if let json = JSONToMap {
+                    
+                    if let parsedObject = (try? immuT.init(JSONObject: json)) as? T {
+                        return .success(parsedObject)
+                    }
+                    
+                }
+                
             } else if let parsedObject = Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONToMap){
                 return .success(parsedObject)
             }
@@ -118,7 +129,31 @@ extension DataRequest {
                 JSONToMap = result.value
             }
             
-            if let parsedObject = Mapper<T>(context: context, shouldIncludeNilValues: false).mapArray(JSONObject: JSONToMap){
+            if let immuT = T.self as? ImmutableMappable.Type {
+                
+                if let json = JSONToMap as? [[String: Any]] {
+
+                    var parsedObjects = [T]()
+                    
+                    for objJSON in json {
+                        
+                        if let parsedObject = (try? immuT.init(JSONObject: objJSON)) as? T {
+                            parsedObjects.append(parsedObject)
+                            
+                        } else {
+                            
+                            let failureReason = "ObjectMapper failed to serialize response."
+                            let error = newError(.dataSerializationFailed, failureReason: failureReason)
+                            return .failure(error)
+                        }
+                        
+                    }
+                    
+                    return .success(parsedObjects)
+
+                }
+                
+            } else if let parsedObject = Mapper<T>(context: context, shouldIncludeNilValues: false).mapArray(JSONObject: JSONToMap){
                 return .success(parsedObject)
             }
             

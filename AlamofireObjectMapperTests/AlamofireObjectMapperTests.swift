@@ -44,6 +44,32 @@ class AlamofireObjectMapperTests: XCTestCase {
         super.tearDown()
     }
 
+	func testResponseImmutableObject() {
+		// This is an example of a functional test case.
+		let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
+		let expectation = self.expectation(description: "\(URL)")
+		
+		_ = Alamofire.request(URL, method: .get).responseObject { (response: DataResponse<ImmutableWeatherResponse>) in
+			expectation.fulfill()
+			
+			let mappedObject = response.result.value
+			
+			XCTAssertNotNil(mappedObject, "Response should not be nil")
+			XCTAssertNotNil(mappedObject?.location, "Location should not be nil")
+			XCTAssertNotNil(mappedObject?.threeDayForecast, "ThreeDayForcast should not be nil")
+			
+			for forecast in mappedObject!.threeDayForecast {
+				XCTAssertNotNil(forecast.day, "day should not be nil")
+				XCTAssertNotNil(forecast.conditions, "conditions should not be nil")
+				XCTAssertNotNil(forecast.temperature, "temperature should not be nil")
+			}
+		}
+		
+		waitForExpectations(timeout: 10) { error in
+			XCTAssertNil(error, "\(error)")
+		}
+	}
+	
     func testResponseObject() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
@@ -177,7 +203,33 @@ class AlamofireObjectMapperTests: XCTestCase {
             XCTAssertNil(error, "\(error)")
         }
     }
-    
+
+	func testResponseImmutableArray() {
+		// This is an example of a functional test case.
+		let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
+		let expectation = self.expectation(description: "\(URL)")
+		
+		_ = Alamofire.request(URL, method: .get).responseArray { (response: DataResponse<[ImmutableForecast]>) in
+			expectation.fulfill()
+			
+			let mappedArray = response.result.value
+			
+			XCTAssertNotNil(mappedArray, "Response should not be nil")
+			
+			XCTAssertTrue(mappedArray?.count == 3, "Didn't parse correct amount of objects")
+
+			for forecast in mappedArray! {
+				XCTAssertNotNil(forecast.day, "day should not be nil")
+				XCTAssertNotNil(forecast.conditions, "conditions should not be nil")
+				XCTAssertNotNil(forecast.temperature, "temperature should not be nil")
+			}
+		}
+		
+		waitForExpectations(timeout: 10) { error in
+			XCTAssertNil(error, "\(error)")
+		}
+	}
+	
     func testResponseArray() {
         // This is an example of a functional test case.
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
@@ -189,7 +241,9 @@ class AlamofireObjectMapperTests: XCTestCase {
             let mappedArray = response.result.value
             
             XCTAssertNotNil(mappedArray, "Response should not be nil")
-            
+			
+			XCTAssertTrue(mappedArray?.count == 3, "Didn't parse correct amount of objects")
+			
             for forecast in mappedArray! {
                 XCTAssertNotNil(forecast.day, "day should not be nil")
                 XCTAssertNotNil(forecast.conditions, "conditions should not be nil")
@@ -252,6 +306,46 @@ class AlamofireObjectMapperTests: XCTestCase {
         }
     }
 }
+
+// MARK: - Response classes
+
+// MARK: - ImmutableMappable
+
+class ImmutableWeatherResponse: ImmutableMappable {
+	let location: String
+	let threeDayForecast: [ImmutableForecast]
+	
+	required init(map: Map) throws {
+		location = try map.value("location")
+		threeDayForecast = try map.value("three_day_forecast")
+	}
+
+	func mapping(map: Map) {
+		location >>> map["location"]
+		threeDayForecast >>> map["three_day_forecast"]
+	}
+}
+
+class ImmutableForecast: ImmutableMappable {
+	let day: String
+	let temperature: Int
+	let conditions: String
+	
+	required init(map: Map) throws {
+		day = try map.value("day")
+		temperature = try map.value("temperature")
+		conditions = try map.value("conditions")
+	}
+	
+	func mapping(map: Map) {
+		day >>> map["day"]
+		temperature >>> map["temperature"]
+		conditions >>> map["conditions"]
+	}
+	
+}
+
+// MARK: - Mappable
 
 class WeatherResponse: Mappable {
 	var location: String?
