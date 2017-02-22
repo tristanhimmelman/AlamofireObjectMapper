@@ -287,7 +287,7 @@ class AlamofireObjectMapperTests: XCTestCase {
 
 class ImmutableWeatherResponse: ImmutableMappable {
 	let location: String
-	let threeDayForecast: [Forecast]
+	let threeDayForecast: [ImmutableForecast]
 	
 	required init(map: Map) throws {
 		location = try map.value("location")
