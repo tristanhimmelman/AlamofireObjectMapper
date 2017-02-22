@@ -129,7 +129,31 @@ extension DataRequest {
                 JSONToMap = result.value
             }
             
-            if let parsedObject = Mapper<T>(context: context, shouldIncludeNilValues: false).mapArray(JSONObject: JSONToMap){
+            if let immuT = T.self as? ImmutableMappable.Type {
+                
+                if let json = JSONToMap as? [[String: Any]] {
+
+                    var parsedObjects = [T]()
+                    
+                    for objJSON in json {
+                        
+                        if let parsedObject = (try? immuT.init(JSONObject: objJSON)) as? T {
+                            parsedObjects.append(parsedObject)
+                            
+                        } else {
+                            
+                            let failureReason = "ObjectMapper failed to serialize response."
+                            let error = newError(.dataSerializationFailed, failureReason: failureReason)
+                            return .failure(error)
+                        }
+                        
+                    }
+                    
+                    return .success(parsedObjects)
+
+                }
+                
+            } else if let parsedObject = Mapper<T>(context: context, shouldIncludeNilValues: false).mapArray(JSONObject: JSONToMap){
                 return .success(parsedObject)
             }
             
