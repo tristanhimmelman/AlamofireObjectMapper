@@ -71,17 +71,17 @@ extension DataRequest {
             if let object = object {
                 _ = Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONToMap, toObject: object)
                 return .success(object)
-				
-			} else if let immuT = T.self as? ImmutableMappable.Type {
-				
-				if let json = JSONToMap {
-					
-					if let parsedObject = (try? immuT.init(JSONObject: json)) as? T {
-						return .success(parsedObject)
-					}
-					
-				}
-				
+                
+            } else if let immuT = T.self as? ImmutableMappable.Type {
+                
+                if let json = JSONToMap {
+                    
+                    if let parsedObject = (try? immuT.init(JSONObject: json)) as? T {
+                        return .success(parsedObject)
+                    }
+                    
+                }
+                
             } else if let parsedObject = Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONToMap){
                 return .success(parsedObject)
             }
