@@ -35,6 +35,8 @@ Given a URL which returns weather data in the following form:
 
 You can use the extension as the follows:
 ```swift
+import AlamofireObjectMapper
+
 let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
 Alamofire.request(URL).responseObject { (response: DataResponse<WeatherResponse>) in
 
@@ -53,6 +55,8 @@ Alamofire.request(URL).responseObject { (response: DataResponse<WeatherResponse>
 The `WeatherResponse` object in the completion handler is a custom object which you define. The only requirement is that the object must conform to [ObjectMapper's](https://github.com/Hearst-DD/ObjectMapper/) `Mappable` protocol. In the above example, the `WeatherResponse` object looks like the following:
 
 ```swift
+import ObjectMapper
+
 class WeatherResponse: Mappable {
     var location: String?
     var threeDayForecast: [Forecast]?
