@@ -7,7 +7,7 @@ AlamofireObjectMapper
 
 An extension to [Alamofire](https://github.com/Alamofire/Alamofire) which automatically converts JSON response data into swift objects using [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper/). 
 
-#Usage
+# Usage
 
 Given a URL which returns weather data in the following form:
 ```
@@ -98,7 +98,7 @@ The `responseObject` function has 3 optional parameters and a required completio
 - `mapToObject`: An object to perform the mapping on to
 - `completionHandler`: A closure to be executed once the request has finished and the data has been mapped by ObjectMapper.
 
-###Easy Mapping of Nested Objects (Hat Tip to Hearst-DD/ObjectMapper)
+### Easy Mapping of Nested Objects (Hat Tip to Hearst-DD/ObjectMapper)
 
 AlamofireObjectMapper supports dot notation within keys for easy mapping of nested objects. Given the following JSON String:
 ```json
@@ -114,7 +114,7 @@ func mapping(map: Map) {
 }
 ```
 
-###KeyPath
+### KeyPath
 
 The `keyPath` variable is used to drill down into a JSON response and only map the data found at that `keyPath`. It supports nested values such as `data.weather` to drill down several levels in a JSON response.
 ```swift
@@ -136,7 +136,7 @@ Alamofire.request(URL).responseObject(keyPath: "data") { (response: DataResponse
 }
 ```
 
-#Array Responses
+# Array Responses
 If you have an endpoint that returns data in `Array` form you can map it with the following function:
 ```swift
 public func responseArray<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, completionHandler: DataResponse<[T]> -> Void) -> Self
@@ -179,7 +179,7 @@ Alamofire.request(URL).responseArray { (response: DataResponse<[Forecast]>) in
 
 ```
 
-#Installation
+# Installation
 AlamofireObjectMapper can be added to your project using [CocoaPods](https://cocoapods.org/) by adding the following line to your Podfile:
 ```
 pod 'AlamofireObjectMapper', '~> 4.0'
