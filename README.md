@@ -98,7 +98,7 @@ The `responseObject` function has 3 optional parameters and a required completio
 - `mapToObject`: An object to perform the mapping on to
 - `completionHandler`: A closure to be executed once the request has finished and the data has been mapped by ObjectMapper.
 
-### Easy Mapping of Nested Objects (Hat Tip to Hearst-DD/ObjectMapper)
+### Easy Mapping of Nested Objects
 
 AlamofireObjectMapper supports dot notation within keys for easy mapping of nested objects. Given the following JSON String:
 ```json
@@ -113,6 +113,7 @@ func mapping(map: Map) {
     distance <- map["distance.value"]
 }
 ```
+[See complete documentation](https://github.com/Hearst-DD/ObjectMapper#easy-mapping-of-nested-objects)
 
 ### KeyPath
 
