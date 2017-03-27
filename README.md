@@ -98,6 +98,22 @@ The `responseObject` function has 3 optional parameters and a required completio
 - `mapToObject`: An object to perform the mapping on to
 - `completionHandler`: A closure to be executed once the request has finished and the data has been mapped by ObjectMapper.
 
+###Easy Mapping of Nested Objects (Hat Tip to Hearst-DD/ObjectMapper)
+
+AlamofireObjectMapper supports dot notation within keys for easy mapping of nested objects. Given the following JSON String:
+```json
+"distance" : {
+     "text" : "102 ft",
+     "value" : 31
+}
+```
+You can access the nested objects as follows:
+```swift
+func mapping(map: Map) {
+    distance <- map["distance.value"]
+}
+```
+
 ###KeyPath
 
 The `keyPath` variable is used to drill down into a JSON response and only map the data found at that `keyPath`. It supports nested values such as `data.weather` to drill down several levels in a JSON response.
