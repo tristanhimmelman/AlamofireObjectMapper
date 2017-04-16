@@ -27,8 +27,10 @@
 //  THE SOFTWARE.
 
 import Foundation
+#if !AOM_NO_MODULE
 import Alamofire
 import ObjectMapper
+#endif
 
 extension DataRequest {
     
