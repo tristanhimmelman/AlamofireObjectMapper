@@ -30,104 +30,165 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
-extension Request {
+public enum MpError: Error {
+    case inputDataNil
+    case inputDataSerializedFailed
 
-	public static func ObjectMapperSerializer<T: Mappable>(keyPath: String?, mapToObject object: T? = nil, context: MapContext? = nil) -> ResponseSerializer<T, NSError> {
-		return ResponseSerializer { request, response, data, error in
-			guard error == nil else {
-				return .Failure(error!)
-			}
+    var description: String {
+        switch self {
+        case .inputDataNil:
+            return "Data could not be serialized. Input data was nil."
+        case .inputDataSerializedFailed:
+            return "ObjectMapper failed to serialize response."
+        }
+    }
+}
 
-			guard let _ = data else {
-				let failureReason = "Data could not be serialized. Input data was nil."
-				let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-				let error = NSError(domain: Error.Domain, code: Error.Code.DataSerializationFailed.rawValue, userInfo: userInfo)
-				return .Failure(error)
-			}
+extension DataRequest {
+    /// Utility function for checking for errors in response
+    internal static func checkResponseForError(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) -> Error? {
+        if let error = error {
+            return error
+        }
+        guard let _ = data else {
+            return MpError.inputDataNil
+        }
+        return nil
+    }
 
-			let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
-			let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
+    /// Utility function for extracting JSON from response
+    internal static func processResponse(request: URLRequest?, response: HTTPURLResponse?, data: Data?, keyPath: String?) -> Any? {
+        let jsonResponseSerializer = DataRequest.jsonResponseSerializer(options: .allowFragments)
+        let result = jsonResponseSerializer.serializeResponse(request, response, data, nil)
 
-			let JSONToMap: AnyObject?
-			if let keyPath = keyPath where keyPath.isEmpty == false {
-				JSONToMap = result.value?.valueForKeyPath(keyPath)
-			} else {
-				JSONToMap = result.value
-			}
+        let JSON: Any?
+        if let keyPath = keyPath, keyPath.isEmpty == false {
+            JSON = (result.value as AnyObject?)?.value(forKeyPath: keyPath)
+        } else {
+            JSON = result.value
+        }
 
-			if let object = object {
-				Mapper<T>().map(JSONToMap, toObject: object)
-				return .Success(object)
-			} else if let parsedObject = Mapper<T>(context: context).map(JSONToMap) {
-				return .Success(parsedObject)
-			}
+        return JSON
+    }
 
-			let failureReason = "ObjectMapper failed to serialize response."
-			let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-			let error = NSError(domain: Error.Domain, code: Error.Code.DataSerializationFailed.rawValue, userInfo: userInfo)
-			return .Failure(error)
-		}
-	}
+    /// BaseMappable Object Serializer
+    public static func ObjectMapperSerializer<T: BaseMappable>(_ keyPath: String?, mapToObject object: T? = nil, context: MapContext? = nil) -> DataResponseSerializer<T> {
+        return DataResponseSerializer { request, response, data, error in
+            if let error = checkResponseForError(request: request, response: response, data: data, error: error) {
+                return .failure(error)
+            }
 
-	/**
-	 Adds a handler to be called once the request has finished.
+            let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath)
 
-	 - parameter queue:             The queue on which the completion handler is dispatched.
-	 - parameter keyPath:           The key path where object mapping should be performed
-	 - parameter object:            An object to perform the mapping on to
-	 - parameter completionHandler: A closure to be executed once the request has finished and the data has been mapped by ObjectMapper.
+            if let object = object {
+                _ = Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONObject, toObject: object)
+                return .success(object)
+            } else if let parsedObject = Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONObject) {
+                return .success(parsedObject)
+            }
 
-	 - returns: The request.
-	 */
+            return .failure(MpError.inputDataSerializedFailed)
+        }
+    }
 
-	public func responseObject<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: Response<T, NSError> -> Void) -> Self {
-		return response(queue: queue, responseSerializer: Request.ObjectMapperSerializer(keyPath, mapToObject: object, context: context), completionHandler: completionHandler)
-	}
+    /// ImmutableMappable Array Serializer
+    public static func ObjectMapperImmutableSerializer<T: ImmutableMappable>(_ keyPath: String?, context: MapContext? = nil) -> DataResponseSerializer<T> {
+        return DataResponseSerializer { request, response, data, error in
+            if let error = checkResponseForError(request: request, response: response, data: data, error: error) {
+                return .failure(error)
+            }
 
-	public static func ObjectMapperArraySerializer<T: Mappable>(keyPath: String?, context: MapContext? = nil) -> ResponseSerializer<[T], NSError> {
-		return ResponseSerializer { request, response, data, error in
-			guard error == nil else {
-				return .Failure(error!)
-			}
+            let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath)
 
-			guard let _ = data else {
-				let failureReason = "Data could not be serialized. Input data was nil."
-				let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-				let error = NSError(domain: Error.Domain, code: Error.Code.DataSerializationFailed.rawValue, userInfo: userInfo)
-				return .Failure(error)
-			}
+            if let JSONObject = JSONObject,
+                let parsedObject = (try? Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONObject)) {
+                return .success(parsedObject)
+            }
 
-			let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
-			let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
+            return .failure(MpError.inputDataSerializedFailed)
+        }
+    }
 
-			let JSONToMap: AnyObject?
-			if let keyPath = keyPath where keyPath.isEmpty == false {
-				JSONToMap = result.value?.valueForKeyPath(keyPath)
-			} else {
-				JSONToMap = result.value
-			}
+    /**
+     Adds a handler to be called once the request has finished.
+     
+     - parameter queue:             The queue on which the completion handler is dispatched.
+     - parameter keyPath:           The key path where object mapping should be performed
+     - parameter object:            An object to perform the mapping on to
+     - parameter completionHandler: A closure to be executed once the request has finished and the data has been mapped by ObjectMapper.
+     
+     - returns: The request.
+     */
+    @discardableResult
+    public func responseObject<T: BaseMappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
+        return response(queue: queue, responseSerializer: DataRequest.ObjectMapperSerializer(keyPath, mapToObject: object, context: context), completionHandler: completionHandler)
+    }
 
-			if let parsedObject = Mapper<T>(context: context).mapArray(JSONToMap) {
-				return .Success(parsedObject)
-			}
+    @discardableResult
+    public func responseObject<T: ImmutableMappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
+        return response(queue: queue, responseSerializer: DataRequest.ObjectMapperImmutableSerializer(keyPath, context: context), completionHandler: completionHandler)
+    }
 
-			let failureReason = "ObjectMapper failed to serialize response."
-			let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-			let error = NSError(domain: Error.Domain, code: Error.Code.DataSerializationFailed.rawValue, userInfo: userInfo)
-			return .Failure(error)
-		}
-	}
+    /// BaseMappable Array Serializer
+    public static func ObjectMapperArraySerializer<T: BaseMappable>(_ keyPath: String?, context: MapContext? = nil) -> DataResponseSerializer<[T]> {
+        return DataResponseSerializer { request, response, data, error in
+            if let error = checkResponseForError(request: request, response: response, data: data, error: error) {
+                return .failure(error)
+            }
 
-	/**
-	 Adds a handler to be called once the request has finished.
+            let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath)
 
-	 - parameter queue: The queue on which the completion handler is dispatched.
-	 - parameter keyPath: The key path where object mapping should be performed
-	 - parameter completionHandler: A closure to be executed once the request has finished and the data has been mapped by ObjectMapper.
+            if let parsedObject = Mapper<T>(context: context, shouldIncludeNilValues: false).mapArray(JSONObject: JSONObject) {
+                return .success(parsedObject)
+            }
 
-	 - returns: The request.
-	 */
-	public func responseArray<T: Mappable>(queue queue: dispatch_queue_t? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: Response<[T], NSError> -> Void) -> Self {
-		return response(queue: queue, responseSerializer: Request.ObjectMapperArraySerializer(keyPath, context: context), completionHandler: completionHandler)
-	}
+            return .failure(MpError.inputDataSerializedFailed)
+        }
+    }
+
+    /// ImmutableMappable Array Serializer
+    public static func ObjectMapperImmutableArraySerializer<T: ImmutableMappable>(_ keyPath: String?, context: MapContext? = nil) -> DataResponseSerializer<[T]> {
+        return DataResponseSerializer { request, response, data, error in
+            if let error = checkResponseForError(request: request, response: response, data: data, error: error) {
+                return .failure(error)
+            }
+
+            if let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath) {
+
+                if let parsedObject = try? Mapper<T>(context: context, shouldIncludeNilValues: false).mapArray(JSONObject: JSONObject) {
+                    return .success(parsedObject)
+                }
+            }
+
+            return .failure(MpError.inputDataSerializedFailed)
+        }
+    }
+
+    /**
+     Adds a handler to be called once the request has finished. T: BaseMappable
+     
+     - parameter queue: The queue on which the completion handler is dispatched.
+     - parameter keyPath: The key path where object mapping should be performed
+     - parameter completionHandler: A closure to be executed once the request has finished and the data has been mapped by ObjectMapper.
+     
+     - returns: The request.
+     */
+    @discardableResult
+    public func responseArray<T: BaseMappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: @escaping (DataResponse<[T]>) -> Void) -> Self {
+        return response(queue: queue, responseSerializer: DataRequest.ObjectMapperArraySerializer(keyPath, context: context), completionHandler: completionHandler)
+    }
+
+    /**
+     Adds a handler to be called once the request has finished. T: ImmutableMappable
+     
+     - parameter queue: The queue on which the completion handler is dispatched.
+     - parameter keyPath: The key path where object mapping should be performed
+     - parameter completionHandler: A closure to be executed once the request has finished and the data has been mapped by ObjectMapper.
+     
+     - returns: The request.
+     */
+    @discardableResult
+    public func responseArray<T: ImmutableMappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: @escaping (DataResponse<[T]>) -> Void) -> Self {
+        return response(queue: queue, responseSerializer: DataRequest.ObjectMapperImmutableArraySerializer(keyPath, context: context), completionHandler: completionHandler)
+    }
 }
