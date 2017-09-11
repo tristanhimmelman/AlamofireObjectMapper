@@ -66,7 +66,7 @@ class AlamofireObjectMapperTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 10) { error in
-            XCTAssertNil(error, "\(error)")
+            XCTAssertNil(error, "\(String(describing: error))")
         }
     }
     
@@ -96,7 +96,7 @@ class AlamofireObjectMapperTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 10) { error in
-            XCTAssertNil(error, "\(error)")
+            XCTAssertNil(error, "\(String(describing: error))")
         }
     }
     
@@ -122,7 +122,7 @@ class AlamofireObjectMapperTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 10) { error in
-            XCTAssertNil(error, "\(error)")
+            XCTAssertNil(error, "\(String(describing: error))")
         }
     }
     
@@ -148,7 +148,7 @@ class AlamofireObjectMapperTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 10) { error in
-            XCTAssertNil(error, "\(error)")
+            XCTAssertNil(error, "\(String(describing: error))")
         }
     }
 
@@ -174,7 +174,7 @@ class AlamofireObjectMapperTests: XCTestCase {
         }
 
         waitForExpectations(timeout: 10) { error in
-            XCTAssertNil(error, "\(error)")
+            XCTAssertNil(error, "\(String(describing: error))")
         }
     }
     
@@ -199,7 +199,7 @@ class AlamofireObjectMapperTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 10) { error in
-            XCTAssertNil(error, "\(error)")
+            XCTAssertNil(error, "\(String(describing: error))")
         }
     }
     
@@ -224,7 +224,7 @@ class AlamofireObjectMapperTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 10) { error in
-            XCTAssertNil(error, "\(error)")
+            XCTAssertNil(error, "\(String(describing: error))")
         }
     }
     
@@ -252,7 +252,7 @@ class AlamofireObjectMapperTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 10) { error in
-            XCTAssertNil(error, "\(error)")
+            XCTAssertNil(error, "\(String(describing: error))")
         }
     }
     
@@ -278,7 +278,7 @@ class AlamofireObjectMapperTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 10) { error in
-            XCTAssertNil(error, "\(error)")
+            XCTAssertNil(error, "\(String(describing: error))")
         }
     }
     
