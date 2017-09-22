@@ -498,11 +498,11 @@
 				TargetAttributes = {
 					6AB2A0101AF26C36001EBB20 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					6AB2A01B1AF26C36001EBB20 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					6AB2A0841AF27DF1001EBB20 = {
 						CreatedOnToolsVersion = 6.3.1;
