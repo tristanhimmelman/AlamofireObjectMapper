@@ -13,10 +13,10 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = '2.0'
   s.tvos.deployment_target = '9.0'
   
-  s.swift_version = '4.0'
+  s.swift_version = '4.2'
 
   s.requires_arc = true
   s.source_files = 'AlamofireObjectMapper/**/*.swift'
-  s.dependency 'Alamofire', '~> 4.1'
-  s.dependency 'ObjectMapper', '~> 3.3'
+  s.dependency 'Alamofire', '~> 4.7'
+  s.dependency 'ObjectMapper', '~> 3.4'
 end
