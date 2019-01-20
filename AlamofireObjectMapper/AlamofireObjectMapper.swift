@@ -83,46 +83,11 @@ extension DataRequest {
     public static func ObjectMapperArraySerializer<T: BaseMappable>(_ keyPath: String?, context: MapContext? = nil) -> MappableArrayResponseSerializer<T> {
         
         return MappableArrayResponseSerializer(keyPath, context: context)
-
-        
-        /* return DataResponseSerializer { request, response, data, error in
-            if let error = checkResponseForError(request: request, response: response, data: data, error: error){
-                return .failure(error)
-            }
-            
-            let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath)
-            
-            if let parsedObject = Mapper<T>(context: context, shouldIncludeNilValues: false).mapArray(JSONObject: JSONObject){
-                return .success(parsedObject)
-            }
-            
-            let failureReason = "ObjectMapper failed to serialize response."
-            let error = newError(.dataSerializationFailed, failureReason: failureReason)
-            return .failure(error) 
-        } */
     }
     
     /// ImmutableMappable Array Serializer
     public static func ObjectMapperImmutableArraySerializer<T: ImmutableMappable>(_ keyPath: String?, context: MapContext? = nil) -> ImmutableMappableArrayResponseSerializer<T> {
-       
         return ImmutableMappableArrayResponseSerializer(keyPath, context: context)
-
-        /* return DataResponseSerializer { request, response, data, error in
-            if let error = checkResponseForError(request: request, response: response, data: data, error: error){
-                return .failure(error)
-            }
-            
-            if let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath){
-                
-                if let parsedObject = try? Mapper<T>(context: context, shouldIncludeNilValues: false).mapArray(JSONObject: JSONObject){
-                    return .success(parsedObject)
-                }
-            }
-            
-            let failureReason = "ObjectMapper failed to serialize response."
-            let error = newError(.dataSerializationFailed, failureReason: failureReason)
-            return .failure(error)
-        } */
     }
     
     /**
@@ -186,24 +151,6 @@ public final class MappableResponseSerializer<T: BaseMappable>: ResponseSerializ
     public func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> T {
         guard error == nil else { throw error! }
         
-        /* return DataResponseSerializer { request, response, data, error in
-         if let error = checkResponseForError(request: request, response: response, data: data, error: error){
-         return .failure(error)
-         }
-         
-         let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath)
-         
-         if let JSONObject = JSONObject,
-         let parsedObject = (try? Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONObject)){
-         return .success(parsedObject)
-         }
-         
-         let failureReason = "ObjectMapper failed to serialize response."
-         let error = newError(.dataSerializationFailed, failureReason: failureReason)
-         return .failure(error)
-         } */
-        
-        
         guard let data = data, !data.isEmpty else {
             guard emptyResponseAllowed(forRequest: request, response: response) else {
                 throw AFError.responseSerializationFailed(reason: .inputDataNilOrZeroLength)
@@ -263,24 +210,6 @@ public final class ImmutableMappableResponseSerializer<T: ImmutableMappable>: Re
     public func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> T {
         guard error == nil else { throw error! }
         
-        /* return DataResponseSerializer { request, response, data, error in
-         if let error = checkResponseForError(request: request, response: response, data: data, error: error){
-         return .failure(error)
-         }
-         
-         let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath)
-         
-         if let JSONObject = JSONObject,
-         let parsedObject = (try? Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONObject)){
-         return .success(parsedObject)
-         }
-         
-         let failureReason = "ObjectMapper failed to serialize response."
-         let error = newError(.dataSerializationFailed, failureReason: failureReason)
-         return .failure(error)
-         } */
-        
-        
         guard let data = data, !data.isEmpty else {
             guard emptyResponseAllowed(forRequest: request, response: response) else {
                 throw AFError.responseSerializationFailed(reason: .inputDataNilOrZeroLength)
@@ -292,13 +221,7 @@ public final class ImmutableMappableResponseSerializer<T: ImmutableMappable>: Re
             
             return emptyValue
         }
-        
-       /* do {
-            return try decoder.decode(T.self, from: data)
-        } catch {
-            throw AFError.responseSerializationFailed(reason: .decodingFailed(error: error))
-        } */
-        
+    
         let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath)
         
         if let JSONObject = JSONObject,
@@ -343,43 +266,18 @@ public final class ImmutableMappableArrayResponseSerializer<T: ImmutableMappable
     public func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> [T] {
         guard error == nil else { throw error! }
         
-        /* return DataResponseSerializer { request, response, data, error in
-         if let error = checkResponseForError(request: request, response: response, data: data, error: error){
-         return .failure(error)
-         }
-         
-         let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath)
-         
-         if let JSONObject = JSONObject,
-         let parsedObject = (try? Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONObject)){
-         return .success(parsedObject)
-         }
-         
-         let failureReason = "ObjectMapper failed to serialize response."
-         let error = newError(.dataSerializationFailed, failureReason: failureReason)
-         return .failure(error)
-         } */
-        
-        
         guard let data = data, !data.isEmpty else {
             guard emptyResponseAllowed(forRequest: request, response: response) else {
                 throw AFError.responseSerializationFailed(reason: .inputDataNilOrZeroLength)
             }
             
-            // TODO - Response JSON Decodable Array
+            // TODO / FIX - Empty Response JSON Decodable Array Fix - "Cast from empty always fails..."
             guard let emptyValue = Empty.value as? [T] else {
                 throw AFError.responseSerializationFailed(reason: .invalidEmptyResponse(type: "\(T.self)"))
             }
             
             return emptyValue
         }
-        
-        /* do {
-         return try decoder.decode(T.self, from: data)
-         } catch {
-         throw AFError.responseSerializationFailed(reason: .decodingFailed(error: error))
-         } */
-        
         
         if let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath){
             
@@ -426,43 +324,19 @@ public final class MappableArrayResponseSerializer<T: BaseMappable>: ResponseSer
     public func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> [T] {
         guard error == nil else { throw error! }
         
-        /* return DataResponseSerializer { request, response, data, error in
-         if let error = checkResponseForError(request: request, response: response, data: data, error: error){
-         return .failure(error)
-         }
-         
-         let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath)
-         
-         if let JSONObject = JSONObject,
-         let parsedObject = (try? Mapper<T>(context: context, shouldIncludeNilValues: false).map(JSONObject: JSONObject)){
-         return .success(parsedObject)
-         }
-         
-         let failureReason = "ObjectMapper failed to serialize response."
-         let error = newError(.dataSerializationFailed, failureReason: failureReason)
-         return .failure(error)
-         } */
-        
-        
         guard let data = data, !data.isEmpty else {
             guard emptyResponseAllowed(forRequest: request, response: response) else {
                 throw AFError.responseSerializationFailed(reason: .inputDataNilOrZeroLength)
             }
             
-            // TODO - Response JSON Decodable Array
+            // TODO / FIX - Empty Response JSON Decodable Array Fix - "Cast from empty always fails..."
             guard let emptyValue = Empty.value as? [T] else {
                 throw AFError.responseSerializationFailed(reason: .invalidEmptyResponse(type: "\(T.self)"))
             }
             
             return emptyValue
         }
-        
-        /* do {
-         return try decoder.decode(T.self, from: data)
-         } catch {
-         throw AFError.responseSerializationFailed(reason: .decodingFailed(error: error))
-         } */
-        
+
         let JSONObject = processResponse(request: request, response: response, data: data, keyPath: keyPath)
         
         if let parsedObject = Mapper<T>(context: context, shouldIncludeNilValues: false).mapArray(JSONObject: JSONObject){
