@@ -349,14 +349,10 @@ public final class MappableArrayResponseSerializer<T: BaseMappable>: ResponseSer
     }
 }
 
-
-
 /// Utility function for extracting JSON from response
 internal func processResponse(request: URLRequest?, response: HTTPURLResponse?, data: Data?, keyPath: String?) -> Any? {
     
-    // ResponseSerializer(
     let jsonResponseSerializer = JSONResponseSerializer(options: .allowFragments)
-    //let jsonResponseSerializer = DataRequest.jsonResponseSerializer(options: .allowFragments)
     if let result = try? jsonResponseSerializer.serialize(request: request, response: response, data: data, error: nil) {
         
         let JSON: Any?
