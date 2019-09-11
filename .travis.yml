@@ -21,3 +21,4 @@ script:
 
 notifications:
   email: false
+  
