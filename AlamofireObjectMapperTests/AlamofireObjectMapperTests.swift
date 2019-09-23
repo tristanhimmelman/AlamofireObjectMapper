@@ -49,10 +49,10 @@ class AlamofireObjectMapperTests: XCTestCase {
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
         let expectation = self.expectation(description: "\(URL)")
 
-        _ = Alamofire.request(URL, method: .get).responseObject { (response: DataResponse<WeatherResponse>) in
+        _ = AF.request(URL, method: .get).responseObject { (response: AFDataResponse<WeatherResponse>) in
             expectation.fulfill()
             
-            let mappedObject = response.result.value
+            let mappedObject = response.value
             
             XCTAssertNotNil(mappedObject, "Response should not be nil")
             XCTAssertNotNil(mappedObject?.location, "Location should not be nil")
@@ -78,10 +78,10 @@ class AlamofireObjectMapperTests: XCTestCase {
         let weatherResponse = WeatherResponse()
         weatherResponse.date = Date()
         
-        _ = Alamofire.request(URL, method: .get).responseObject(mapToObject: weatherResponse) { (response: DataResponse<WeatherResponse>) in
+        _ = AF.request(URL, method: .get).responseObject(mapToObject: weatherResponse) { (response: AFDataResponse<WeatherResponse>) in
             expectation.fulfill()
             
-            let mappedObject = response.result.value
+            let mappedObject = response.value
             print(weatherResponse)
             XCTAssertNotNil(mappedObject, "Response should not be nil")
             XCTAssertNotNil(mappedObject?.date, "Date should not be nil") // Date is not in JSON but should not be nil because we mapped onto an existing object with a date set
@@ -105,10 +105,10 @@ class AlamofireObjectMapperTests: XCTestCase {
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/2ee8f34d21e8febfdefb2b3a403f18a43818d70a/sample_keypath_json"
         let expectation = self.expectation(description: "\(URL)")
         
-        _ = Alamofire.request(URL, method: .get).responseObject(keyPath: "data") { (response: DataResponse<WeatherResponse>) in
+        _ = AF.request(URL, method: .get).responseObject(keyPath: "data") { (response: AFDataResponse<WeatherResponse>) in
             expectation.fulfill()
             
-            let mappedObject = response.result.value
+            let mappedObject = response.value
             
             XCTAssertNotNil(mappedObject, "Response should not be nil")
             XCTAssertNotNil(mappedObject?.location, "Location should not be nil")
@@ -131,10 +131,10 @@ class AlamofireObjectMapperTests: XCTestCase {
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/97231a04e6e4970612efcc0b7e0c125a83e3de6e/sample_keypath_json"
         let expectation = self.expectation(description: "\(URL)")
         
-        _ = Alamofire.request(URL, method: .get).responseObject(keyPath: "response.data") { (response: DataResponse<WeatherResponse>) in
+        _ = AF.request(URL, method: .get).responseObject(keyPath: "response.data") { (response: AFDataResponse<WeatherResponse>) in
             expectation.fulfill()
             
-            let mappedObject = response.result.value
+            let mappedObject = response.value
             
             XCTAssertNotNil(mappedObject, "Response should not be nil")
             XCTAssertNotNil(mappedObject?.location, "Location should not be nil")
@@ -157,10 +157,10 @@ class AlamofireObjectMapperTests: XCTestCase {
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
         let expectation = self.expectation(description: "\(URL)")
 
-        _ = Alamofire.request(URL, method: .get).responseArray { (response: DataResponse<[Forecast]>) in
+        _ = AF.request(URL, method: .get).responseArray { (response: AFDataResponse<[Forecast]>) in
             expectation.fulfill()
             
-            let mappedArray = response.result.value
+            let mappedArray = response.value
             
             XCTAssertNotNil(mappedArray, "Response should not be nil")
 			
@@ -183,11 +183,11 @@ class AlamofireObjectMapperTests: XCTestCase {
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
         let expectation = self.expectation(description: "\(URL)")
         
-        _ = Alamofire.request(URL, method: .get).responseArray(keyPath: "three_day_forecast") { (response: DataResponse<[Forecast]>) in
+        _ = AF.request(URL, method: .get).responseArray(keyPath: "three_day_forecast") { (response: AFDataResponse<[Forecast]>) in
         
             expectation.fulfill()
             
-            let mappedArray = response.result.value
+            let mappedArray = response.value
             
             XCTAssertNotNil(mappedArray, "Response should not be nil")
             
@@ -208,11 +208,11 @@ class AlamofireObjectMapperTests: XCTestCase {
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/97231a04e6e4970612efcc0b7e0c125a83e3de6e/sample_keypath_json"
         let expectation = self.expectation(description: "\(URL)")
         
-        _ = Alamofire.request(URL, method: .get).responseArray(keyPath: "response.data.three_day_forecast") { (response: DataResponse<[Forecast]>) in
+        _ = AF.request(URL, method: .get).responseArray(keyPath: "response.data.three_day_forecast") { (response: AFDataResponse<[Forecast]>) in
             
             expectation.fulfill()
             
-            let mappedArray = response.result.value
+            let mappedArray = response.value
             
             XCTAssertNotNil(mappedArray, "Response should not be nil")
             
@@ -235,10 +235,10 @@ class AlamofireObjectMapperTests: XCTestCase {
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/d8bb95982be8a11a2308e779bb9a9707ebe42ede/sample_json"
         let expectation = self.expectation(description: "\(URL)")
         
-        _ = Alamofire.request(URL, method: .get).responseObject { (response: DataResponse<WeatherResponseImmutable>) in
+        _ = AF.request(URL, method: .get).responseObject { (response: AFDataResponse<WeatherResponseImmutable>) in
             expectation.fulfill()
             
-            let mappedObject = response.result.value
+            let mappedObject = response.value
             
             XCTAssertNotNil(mappedObject, "Response should not be nil")
             XCTAssertNotNil(mappedObject?.location, "Location should not be nil")
@@ -261,10 +261,10 @@ class AlamofireObjectMapperTests: XCTestCase {
         let URL = "https://raw.githubusercontent.com/tristanhimmelman/AlamofireObjectMapper/f583be1121dbc5e9b0381b3017718a70c31054f7/sample_array_json"
         let expectation = self.expectation(description: "\(URL)")
         
-        _ = Alamofire.request(URL, method: .get).responseArray { (response: DataResponse<[ImmutableForecast]>) in
+        _ = AF.request(URL, method: .get).responseArray { (response: AFDataResponse<[ImmutableForecast]>) in
             expectation.fulfill()
             
-            let mappedArray = response.result.value
+            let mappedArray = response.value
             
             XCTAssertNotNil(mappedArray, "Response should not be nil")
             
