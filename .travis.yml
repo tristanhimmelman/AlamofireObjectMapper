@@ -12,7 +12,7 @@ env:
     - SCHEME="AlamofireObjectMapper tvOS"
 
 before_install:
-  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+  - gem install xcpretty --no-document --quiet
 
 script:
   - set -o pipefail
