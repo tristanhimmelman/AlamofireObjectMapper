@@ -26,12 +26,16 @@ let package = Package(
     targets: [
         .target(
             name: "AlamofireObjectMapper",
-            path: ".",
+            dependencies: [
+                "Alamofire",
+                "ObjectMapper"
+            ],
+            path: "AlamofireObjectMapper",
             exclude: [
                 "AlamofireObjectMapperTest",
                 "Carthage"
             ]
-        )
+        ),
     ],
     swiftLanguageVersions: [.v5]
 )
