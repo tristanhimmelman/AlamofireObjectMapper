@@ -17,6 +17,6 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
   s.source_files = 'AlamofireObjectMapper/**/*.swift'
-  s.dependency 'Alamofire', '5.0.0-rc.3'
+  s.dependency 'Alamofire', '~> 5.0.0'
   s.dependency 'ObjectMapper', '~> 3.5.1'
 end
