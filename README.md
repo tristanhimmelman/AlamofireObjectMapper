@@ -3,6 +3,7 @@ AlamofireObjectMapper
 [![Build Status](https://travis-ci.org/tristanhimmelman/AlamofireObjectMapper.svg?branch=master)](https://travis-ci.org/tristanhimmelman/AlamofireObjectMapper)
 [![CocoaPods](https://img.shields.io/cocoapods/v/AlamofireObjectMapper.svg)](https://github.com/tristanhimmelman/AlamofireObjectMapper)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift Package Manager](https://rawgit.com/jlyonsmith/artwork/master/SwiftPackageManager/swiftpackagemanager-compatible.svg)](https://swift.org/package-manager/)
 
 
 An extension to [Alamofire](https://github.com/Alamofire/Alamofire) which automatically converts JSON response data into swift objects using [ObjectMapper](https://github.com/Hearst-DD/ObjectMapper/). 
@@ -191,3 +192,11 @@ If you're using [Carthage](https://github.com/Carthage/Carthage) you can add a d
 ```
 github "tristanhimmelman/AlamofireObjectMapper" ~> 5.2
 ```
+
+### Swift Package Manager
+To add AlamofireObjectMapper to a [Swift Package Manager](https://swift.org/package-manager/) based project, add:
+
+```swift
+.package(url: "https://github.com/tristanhimmelman/AlamofireObjectMapper", .upToNextMajor(from: "6.4.0")),
+```
+to your `Package.swift` files `dependencies` array.
