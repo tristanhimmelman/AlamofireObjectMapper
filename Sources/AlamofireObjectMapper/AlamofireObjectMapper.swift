@@ -4,7 +4,7 @@
 //
 //  Created by Tristan Himmelman on 2015-04-30.
 //
-//  The MIT License (MIT)
+//  The MIT License (MIT)≤
 //
 //  Copyright (c) 2014-2015 Tristan Himmelman
 //

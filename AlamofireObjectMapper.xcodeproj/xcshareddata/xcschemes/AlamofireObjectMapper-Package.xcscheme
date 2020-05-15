@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "9999"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6AC4580B1BA34C5600054758"
+               BlueprintIdentifier = "AlamofireObjectMapper::AlamofireObjectMapper"
                BuildableName = "AlamofireObjectMapper.framework"
-               BlueprintName = "AlamofireObjectMapper watchOS"
+               BlueprintName = "AlamofireObjectMapper"
                ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,17 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AlamofireObjectMapper::AlamofireObjectMapperTests"
+               BuildableName = "AlamofireObjectMapperTests.xctest"
+               BlueprintName = "AlamofireObjectMapperTests"
+               ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -42,17 +50,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6AC4580B1BA34C5600054758"
-            BuildableName = "AlamofireObjectMapper.framework"
-            BlueprintName = "AlamofireObjectMapper watchOS"
-            ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -60,15 +57,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6AC4580B1BA34C5600054758"
-            BuildableName = "AlamofireObjectMapper.framework"
-            BlueprintName = "AlamofireObjectMapper watchOS"
-            ReferencedContainer = "container:AlamofireObjectMapper.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
