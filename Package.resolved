@@ -12,7 +12,7 @@
       },
       {
         "package": "ObjectMapper",
-        "repositoryURL": "git@github.com:freesuraj/ObjectMapper.git",
+        "repositoryURL": "https://github.com/freesuraj/ObjectMapper",
         "state": {
           "branch": "spm",
           "revision": "e8f3b902433906ca1953ad67e3ef3a16e4c5f000",
