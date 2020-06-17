@@ -14,9 +14,9 @@
         "package": "ObjectMapper",
         "repositoryURL": "https://github.com/freesuraj/ObjectMapper",
         "state": {
-          "branch": "spm",
+          "branch": null,
           "revision": "e8f3b902433906ca1953ad67e3ef3a16e4c5f000",
-          "version": null
+          "version": "4.0.0"
         }
       }
     ]
