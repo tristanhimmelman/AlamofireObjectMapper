@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire",
+        "state": {
+          "branch": null,
+          "revision": "0c8cb78d05b6d067ee331c05058ff4dedcb45ffa",
+          "version": "5.0.0"
+        }
+      },
+      {
+        "package": "ObjectMapper",
+        "repositoryURL": "https://github.com/freesuraj/ObjectMapper",
+        "state": {
+          "branch": null,
+          "revision": "e8f3b902433906ca1953ad67e3ef3a16e4c5f000",
+          "version": "4.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
