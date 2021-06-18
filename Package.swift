@@ -30,10 +30,12 @@ let package = Package(
         .target(
             name: "AlamofireObjectMapper",
             dependencies: ["Alamofire", "ObjectMapper"],
-            path: "Sources/AlamofireObjectMapper"),
+            path: "Sources/AlamofireObjectMapper",
+            exclude: ["Info.plist"]),
         .testTarget(
             name: "AlamofireObjectMapperTests",
             dependencies: ["AlamofireObjectMapper"],
-            path: "Tests/AlamofireObjectMapperTests")
+            path: "Tests/AlamofireObjectMapperTests",
+            exclude: ["Info.plist"])
     ]
 )
