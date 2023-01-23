@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/osx,swift
 
+.swiftpm/**
+Package.resolved
+
 ### OSX ###
 *.DS_Store
 .AppleDouble
